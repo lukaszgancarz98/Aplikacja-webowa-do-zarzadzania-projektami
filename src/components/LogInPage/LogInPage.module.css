@@ -1,0 +1,15 @@
+.div{
+    background-image: url("backphoto.jpg");
+    min-height: 100vh;
+    min-width: 100vh;
+}
+
+.loginwindow{
+    padding-top: 15%;
+    right: 10%;
+}
+
+.loginbutton{
+    left: 100%;
+    background-color: lime;
+}

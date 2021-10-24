@@ -1,0 +1,30 @@
+.mainCol {
+    position: absolute;
+    left: 13%;
+    color: red;
+    width: 80%;
+}
+
+.col {
+    position: relative;
+    padding-left: 5%;
+}
+
+.card {
+    position: relative;
+    top: 15px;
+    padding-bottom: 15px;
+    height: 15%;
+    width: 100%;
+}
+
+.scroll {
+    position: relative;
+    width: 30%;
+    overflow: 'auto';
+}
+
+.list {
+    position: relative;
+    height: 50%;
+}

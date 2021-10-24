@@ -1,0 +1,14 @@
+.friendlist{
+    left: 30%;
+    text-align: center;
+    width: 45%;
+    height: auto;
+}
+
+.invite{
+    position: absolute;
+    text-align: center;
+    left: -10%;
+    width: 40%;
+    height: 50%;
+}

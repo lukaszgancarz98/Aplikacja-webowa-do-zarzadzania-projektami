@@ -1,0 +1,18 @@
+.button{
+    background-color: purple;
+    color: red;
+    border-color: blue;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;  
+}
+
+.projectlist{
+    padding-left: 30%;
+    padding-top: 1%;
+    width: 70%;
+}
+
+.buttoncreate{
+    padding-left: 60%;
+}

@@ -1,0 +1,23 @@
+.div{
+    background-image: url("backphotoreg.jpg");
+    min-height: 100vh;
+    min-width: 100vh;
+}
+
+.button{
+    background-color: green;
+    border-color: lightgreen;
+    left: 50%;
+}
+
+.input{
+    background-color: white;
+    color: black;
+    width: 180%;
+}
+
+.passinput{
+    background-color: white;
+    color: black;
+    width: 180%;
+}

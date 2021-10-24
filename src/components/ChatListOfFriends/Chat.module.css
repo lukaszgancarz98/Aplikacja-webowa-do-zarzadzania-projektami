@@ -1,0 +1,53 @@
+.friendlistopen {
+    position: fixed;
+    bottom: 1%;
+    right: 1%;
+    width: 15%;
+    height: 30%;
+    border: 3px solid gray;
+}
+
+.friendlistclosed {
+    position: fixed;
+    bottom: 1%;
+    right: 1%;
+    width: 15%;
+    border: 3px solid gray;
+}
+
+.userstyles {
+    border-bottom: 3px solid gray;
+}
+
+.usernamebutton {
+    color: brown;
+}
+
+.messageinput {
+    width: 12vw;
+    height: 3.75vh;
+    margin-top: 2%;
+    margin-left: 2%;
+    bottom: 1.45%;
+    border-radius: 20px;
+}
+
+.firstClosedChat {
+    position: fixed;
+    bottom: 1%;
+    right: 17%;
+    width: 15%;
+    border: 3px solid gray;
+}
+
+.secoundClosedChat {
+    position: fixed;
+    bottom: 1%;
+    right: 33%;
+    width: 15%;
+    border: 3px solid gray;
+}
+
+.showtime {
+    width: 50%;
+}

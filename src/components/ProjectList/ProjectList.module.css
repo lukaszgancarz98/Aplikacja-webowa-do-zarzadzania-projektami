@@ -1,0 +1,11 @@
+.list{
+    width: 100%;
+    background-color: rgb(49, 47, 47);
+}
+
+.card{
+    background-color: rgb(83, 79, 79);
+    border-color: black;
+    width: 90%;
+    left: 5%;
+}

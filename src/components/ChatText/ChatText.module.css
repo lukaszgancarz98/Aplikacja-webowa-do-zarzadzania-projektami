@@ -1,0 +1,39 @@
+  .divChatLeft {
+    width: 70%;
+    margin-left: 0;
+    margin-right: auto;
+    border: 1px solid gray;
+    border-radius: 20px;
+    background-color: rgb(230, 230, 230);
+  }
+
+  .divChatRight {
+    background-color: lightblue;
+    width: 70%;
+    margin-left: auto;
+    margin-right: 0;
+    border: 1px solid gray;
+    border-radius: 20px;
+  }
+
+  .leftSite {
+    padding-left: 10%;
+    height: 1px;
+    font-size: x-small;
+  }
+
+  .leftSiteMessage {
+    padding-left: 5%;
+    height: auto;
+  }
+
+  .rightSite {
+    padding-left: 10%;
+    height: 1px;
+    font-size: x-small;
+  }
+
+  .rightSiteMessage {
+    padding-left: 5%;
+    height: auto;
+  }
