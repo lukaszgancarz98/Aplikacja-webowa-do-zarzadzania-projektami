@@ -5,6 +5,7 @@
     width: 15%;
     height: 30%;
     border: 3px solid gray;
+    background-color: rgb(224, 224, 224);
 }
 
 .friendlistclosed {
@@ -17,6 +18,7 @@
 
 .userstyles {
     border-bottom: 3px solid gray;
+    background-color: rgb(199, 199, 199);
 }
 
 .usernamebutton {
@@ -46,6 +48,13 @@
     right: 33%;
     width: 15%;
     border: 3px solid gray;
+}
+
+.deletechatbutton {
+    position: fixed;
+    bottom: 1%;
+    right: 35%;
+    width: 15%;
 }
 
 .showtime {

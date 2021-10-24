@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import styles from '../ChatListOfFriends/Chat.module.css';
 import ChatText from '../ChatText/ChatText';
 import FindNameByEmail from '../FindNameByEmail/FindNameByEmail';
-import NewMessage from '../NewMessage/NewMessage';
 import { ChatContext } from '../ChatContext/ChatContext';
 
 const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMessages }) => {
@@ -18,7 +17,7 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
   const [receiver, setReceiver] = useState();
   const [form] = Form.useForm();
   const { modalOne, modalTwo, openChat, changeFlagOne, changeFlagTwo } = useContext(ChatContext);
-  console.log(modalOne);
+  console.log(openChat);
   const chatStyles = {
     chatStylesOne: {
       position: 'fixed',
@@ -28,6 +27,7 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
       width: '15%',
       alignItems: 'center',
       border: '3px solid gray',
+      backgroundColor: 'rgb(224, 224, 224)',
     },
     chatStylesTwo: {
       position: 'fixed',
@@ -37,6 +37,7 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
       width: '15%',
       alignItems: 'center',
       border: '3px solid gray',
+      backgroundColor: 'rgb(224, 224, 224)',
     },
     buttonsendOne: {
       position: 'fixed',
@@ -196,7 +197,9 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
           <Button className={styles.firstClosedChat} onClick={() => changeFlagOne(modalOne)}>
             <Row>
               <Col>
-                <h6 style={{ position: 'fixed', bottom: '1%' }}>{openChatArray[0]}</h6>
+                <h6 style={{ position: 'fixed', bottom: '1%' }}>
+                  <FindNameByEmail users={users} email={openChatArray[0]} />
+                </h6>
               </Col>
               <Col>
                 <PlusSquareOutlined
@@ -204,6 +207,11 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
                 />
               </Col>
             </Row>
+          </Button>
+          <Button size="small" type="text" onClick={() => deleteWindowChat(openChatArray[0])}>
+            <CloseSquareOutlined
+              style={{ position: 'fixed', right: '19%', bottom: '1.75%', fontSize: 'large' }}
+            />
           </Button>
         </>
       );
@@ -280,7 +288,9 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
           <Button className={styles.secoundClosedChat} onClick={() => changeFlagTwo(modalTwo)}>
             <Row>
               <Col>
-                <h6 style={{ position: 'fixed', bottom: '1%' }}>{openChatArray[1]}</h6>
+                <h6 style={{ position: 'fixed', bottom: '1%' }}>
+                  <FindNameByEmail users={users} email={openChatArray[1]} />
+                </h6>
               </Col>
               <Col>
                 <PlusSquareOutlined
@@ -288,6 +298,11 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
                 />
               </Col>
             </Row>
+          </Button>
+          <Button size="small" type="text" onClick={() => deleteWindowChat(openChatArray[1])}>
+            <CloseSquareOutlined
+              style={{ position: 'fixed', right: '35%', bottom: '1.75%', fontSize: 'large' }}
+            />
           </Button>
         </>
       );
