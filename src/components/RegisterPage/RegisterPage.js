@@ -8,7 +8,7 @@ import { VariableContext } from '../VariableContext/VariableContext';
 
 const RegisterPage = () => {
   const history = useHistory();
-  const { email, newEmail } = useContext(EmailContext);
+  const { newEmail } = useContext(EmailContext);
   const { newName } = useContext(VariableContext);
   const [newEmailReg] = useState('');
   const [users, setUsers] = useState();
@@ -40,15 +40,14 @@ const RegisterPage = () => {
   };
 
   const Register = (values) => {
-    setNewPassword(values.newPassword);
-    newName(values.newNameReg);
-    newEmail(values.newEmailReg);
     if (values.newEmailReg !== '') {
-      const findUser = users.find((user) => user.user === values.newEmailReg);
-      const findEmail = users.find((user) => user.email === values.newNameReg);
-      console.log(findUser, findEmail);
+      console.log(values.newEmailReg, values.newNameReg);
+      const findUser = users.find((user) => user.user === values.newNameReg);
+      const findEmail = users.find((user) => user.email === values.newEmailReg);
       if (findUser === undefined && findEmail === undefined) {
-        console.log('?');
+        setNewPassword(values.newPassword);
+        newName(values.newNameReg);
+        newEmail(values.newEmailReg);
         fetch('http://localhost:3000/register', {
           method: 'post',
           headers: { 'Content-Type': 'application/json' },
@@ -60,6 +59,7 @@ const RegisterPage = () => {
         })
           .then((response) => response.json())
           .then((user) => {
+            console.log(user);
             if (user !== 'fail') {
               history.push('/projectplanner');
             } else {

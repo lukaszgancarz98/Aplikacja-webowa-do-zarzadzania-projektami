@@ -123,9 +123,6 @@ const FriendList = ({ users = [], email, getUsers }) => {
                     >
                       <Text>{searchName(item)}</Text>
                     </Popover>
-                    <Button shape="round" onClick={() => console.log('działa')}>
-                      Chat
-                    </Button>
                   </Space>
                 </>
               ))}
@@ -179,7 +176,7 @@ const FriendList = ({ users = [], email, getUsers }) => {
   return (
     <>
       {friendslist}
-      <Button onClick={() => deleteunused()}>Del</Button>
+      {/* <Button onClick={() => deleteunused()}>Del</Button> */}
     </>
   );
 };

@@ -17,7 +17,6 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
   const [receiver, setReceiver] = useState();
   const [form] = Form.useForm();
   const { modalOne, modalTwo, openChat, changeFlagOne, changeFlagTwo } = useContext(ChatContext);
-  console.log(openChat);
   const chatStyles = {
     chatStylesOne: {
       position: 'fixed',

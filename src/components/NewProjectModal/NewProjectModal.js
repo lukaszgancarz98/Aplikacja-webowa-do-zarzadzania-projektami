@@ -77,7 +77,7 @@ const NewProjectModal = ({ email, toggle, getProjects }) => {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" style={{ float: 'right' }}>
-            Save
+            Stwórz
           </Button>
         </Form.Item>
       </Form>

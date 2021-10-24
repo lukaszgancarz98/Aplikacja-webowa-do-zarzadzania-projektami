@@ -24,17 +24,18 @@ const Chat = () => {
     getUsers();
   }, []);
   if (users) {
-    const friends = users
-      .find((item) => item.email === email)
-      .friends.split(',')
-      .filter((friend) => friend !== '');
-    return (
-      <>
-        <ChatProvider>
-          <ChatListOfFriends users={users} friends={friends} email={email} />
-        </ChatProvider>
-      </>
-    );
+    const user = users.find((item) => item.email === email);
+    console.log(user);
+    if (user.friends !== null && user.friends !== '') {
+      const friends = user.friends.split(',').filter((friend) => friend !== '');
+      return (
+        <>
+          <ChatProvider>
+            <ChatListOfFriends users={users} friends={friends} email={email} />
+          </ChatProvider>
+        </>
+      );
+    }
   }
   return <></>;
 };

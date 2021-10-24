@@ -67,6 +67,9 @@ const Users = ({
               console.log('błędny login lub hasło');
             }
           });
+        toggle();
+        getProjects();
+        getUsers();
       }
     } else {
       const findUser = users.find((user) => value.user === user.user && value.email === user.email);
@@ -87,11 +90,11 @@ const Users = ({
               console.log('błędny login lub hasło');
             }
           });
+        toggle();
+        getProjects();
+        getUsers();
       }
     }
-    toggle();
-    getProjects();
-    getUsers();
   };
   const displayUsers = (item) => {
     const isThisUser = users.find((user) => user.email === item);
