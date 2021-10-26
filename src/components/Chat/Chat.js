@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { EmailContext } from '../EmailContext/EmailContext';
 import ChatListOfFriends from '../ChatListOfFriends/ChatListOfFriends';
-import { ChatProvider } from '../ChatContext/ChatContext';
 
 const Chat = () => {
   const { email } = useContext(EmailContext);
@@ -30,9 +29,7 @@ const Chat = () => {
       const friends = user.friends.split(',').filter((friend) => friend !== '');
       return (
         <>
-          <ChatProvider>
-            <ChatListOfFriends users={users} friends={friends} email={email} />
-          </ChatProvider>
+          <ChatListOfFriends users={users} friends={friends} email={email} />
         </>
       );
     }

@@ -13,7 +13,8 @@ import FindNameByEmail from '../FindNameByEmail/FindNameByEmail';
 import { ChatContext } from '../ChatContext/ChatContext';
 
 const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMessages }) => {
-  const [messageToSave] = useState();
+  const [messageToSaveOne] = useState();
+  const [messageToSaveTwo] = useState();
   const [receiver, setReceiver] = useState();
   const [form] = Form.useForm();
   const { modalOne, modalTwo, openChat, changeFlagOne, changeFlagTwo } = useContext(ChatContext);
@@ -83,6 +84,12 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
     setReceiver(receiver);
   };
   const addMessage = (message) => {
+    let stringToSend;
+    if (message.messageToSaveOne !== undefined) {
+      stringToSend = message.messageToSaveOne;
+    } else if (message.messageToSaveTwo !== undefined) {
+      stringToSend = message.messageToSaveTwo;
+    }
     const findUserEMail = users.find((user) => user.email === receiver);
     if (message !== null && message !== '') {
       fetch('http://localhost:3000/addmessage', {
@@ -91,7 +98,7 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
         body: JSON.stringify({
           email,
           receiver: findUserEMail.email,
-          message: message.messageToSave,
+          message: stringToSend,
         }),
       }).then((data) => {
         if (data === 'success') {
@@ -167,12 +174,12 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
             <Row style={{ height: '16%', backgroundColor: 'brown' }}>
               <Form
                 initialValues={{
-                  messageToSave,
+                  messageToSaveOne,
                 }}
                 form={form}
                 onFinish={addMessage}
               >
-                <Form.Item name="messageToSave">
+                <Form.Item name="messageToSaveOne">
                   <Input className={styles.messageinput} />
                 </Form.Item>
                 <Form.Item>
@@ -257,12 +264,12 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
               <div>
                 <Form
                   initialValues={{
-                    messageToSave,
+                    messageToSaveTwo,
                   }}
                   form={form}
                   onFinish={addMessage}
                 >
-                  <Form.Item name="messageToSave">
+                  <Form.Item name="messageToSaveTwo">
                     <Input className={styles.messageinput} />
                   </Form.Item>
                   <Form.Item>

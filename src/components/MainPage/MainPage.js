@@ -12,12 +12,14 @@ import { EmailContext } from '../EmailContext/EmailContext';
 import ProjectList from '../ProjectList/ProjectList';
 import { VariableContext } from '../VariableContext/VariableContext';
 import UserSettings from '../UserSettings/UserSettings';
+import { ChatContext } from '../ChatContext/ChatContext';
 
 const { TabPane } = Tabs;
 
 const MainPage = () => {
-  const { email } = useContext(EmailContext);
+  const { email, setEmail } = useContext(EmailContext);
   const { name, setUsers, users } = useContext(VariableContext);
+  const { changeFlag, changeFlagOne, changeFlagTwo, setOpenChat } = useContext(ChatContext);
   const [modal, setModal] = useState();
   const [projects, setProjects] = useState();
   const toggle = () => {
@@ -26,6 +28,11 @@ const MainPage = () => {
   const history = useHistory();
   const handleonClick = () => {
     history.push('/');
+    setEmail('');
+    changeFlag(true);
+    changeFlagOne(false);
+    changeFlagTwo(false);
+    setOpenChat('');
   };
   const getUsers = () => {
     fetch('http://localhost:3000/getusers', {

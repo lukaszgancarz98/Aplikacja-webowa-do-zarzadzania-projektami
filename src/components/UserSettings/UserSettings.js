@@ -34,13 +34,15 @@ const UserSettings = ({ users = [], getUsers, email }) => {
       const checkRequest = recipient.friendsrequest.split(',').find((request) => request === email);
       if (checkRequest !== email) {
         const check = `${recipient.friendsrequest}${email},`;
+        console.log(recipient.friendsrequest);
         const deleteNull = check.replace(`null`, '');
+        const deleteObjectUndefined = deleteNull.replace(`[object Undefined]`, '');
         fetch('http://localhost:3000/invite', {
           method: 'put',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             email: newFriend,
-            friendsrequest: deleteNull,
+            friendsrequest: deleteObjectUndefined,
           }),
         })
           .then((response) => response.json())
@@ -84,7 +86,13 @@ const UserSettings = ({ users = [], getUsers, email }) => {
     }
     const friends = `${currentData[0].friends}${value},`;
     const recipient = users.find((user) => value === user.email);
-    const recipientFriends = `${recipient.friends}${email},`;
+    let friendsValue = '';
+    if (recipient.friends === undefined) {
+      friendsValue = '';
+    } else {
+      friendsValue = recipient.friends;
+    }
+    const recipientFriends = `${friendsValue}${email},`;
     const recipientRequest = `${recipient.friendsrequest}`;
     const deleteNullF = friends.replace(`null`, '');
     const deleteNullFR = recipientFriends.replace(`null`, '');

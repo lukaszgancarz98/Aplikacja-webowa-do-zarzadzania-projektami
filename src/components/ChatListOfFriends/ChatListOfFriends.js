@@ -43,11 +43,6 @@ const ChatListOfFriends = ({ users = [], friends, email }) => {
   }
   let title = <></>;
   if (messages) {
-    console.log(messages);
-    console.log(
-      messages.filter((message) => message.receiver === email && message.seen === 'no').length,
-      messages.filter((message) => message.receiver === email && message.seen === 'no')
-    );
     if (
       messages.filter((message) => message.receiver === email && message.seen === 'no').length >= 1
     ) {

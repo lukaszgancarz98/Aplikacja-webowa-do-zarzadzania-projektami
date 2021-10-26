@@ -1,5 +1,6 @@
 import { React, useState, useContext, useEffect } from 'react';
 import { Button, Input, Form, Row, Col } from 'antd';
+import { Header } from 'antd/lib/layout/layout';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { EmailContext } from '../EmailContext/EmailContext';
@@ -38,10 +39,12 @@ const RegisterPage = () => {
       },
     ],
   };
-
+  const handleonClick = () => {
+    history.push('/');
+  };
   const Register = (values) => {
     if (values.newEmailReg !== '') {
-      console.log(values.newEmailReg, values.newNameReg);
+      console.log(users);
       const findUser = users.find((user) => user.user === values.newNameReg);
       const findEmail = users.find((user) => user.email === values.newEmailReg);
       if (findUser === undefined && findEmail === undefined) {
@@ -91,6 +94,15 @@ const RegisterPage = () => {
 
   return (
     <>
+      <Header>
+        <Row>
+          <Col>
+            <Button className={styles.button} shape="round" onClick={handleonClick}>
+              Powrót
+            </Button>
+          </Col>
+        </Row>
+      </Header>
       <div className={styles.div}>
         <Col offset={10}>
           <Row>
