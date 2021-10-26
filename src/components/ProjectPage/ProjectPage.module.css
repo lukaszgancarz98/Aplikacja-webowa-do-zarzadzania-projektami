@@ -1,8 +1,15 @@
-.mainCol {
+.mainColdark {
     position: absolute;
     left: 13%;
-    color: red;
     width: 80%;
+    background-color: rgb(15, 15, 15);
+}
+
+.mainCollight {
+    position: absolute;
+    left: 13%;
+    width: 80%;
+    background-color: rgb(248, 239, 228);
 }
 
 .col {
@@ -10,12 +17,32 @@
     padding-left: 5%;
 }
 
-.card {
+.itemsdark {
     position: relative;
     top: 15px;
     padding-bottom: 15px;
     height: 15%;
     width: 100%;
+    background-color: rgb(59, 59, 59);
+}
+
+.itemslight {
+    position: relative;
+    top: 15px;
+    padding-bottom: 15px;
+    height: 15%;
+    width: 100%;
+    background-color: whitesmoke;
+    border-color: black;
+}
+
+.carddark {
+    background-color: black;
+}
+
+.cardlight {
+    background-color: rgb(248, 239, 228);
+    border-color: black;
 }
 
 .scroll {
@@ -27,4 +54,24 @@
 .list {
     position: relative;
     height: 50%;
+}
+
+.divdark {
+    background-color: rgb(15, 15, 15);
+    width: 100vw;
+    height: 100vh;
+}
+
+.divlight {
+    background-color: rgb(248, 239, 228);
+    width: 100vw;
+    height: 100vh;
+}
+
+.modaldark {
+    background-color: rgb(15, 15, 15);
+}
+
+.modallight {
+    background-color: rgb(248, 239, 228);
 }

@@ -4,8 +4,9 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { VariableContext } from '../VariableContext/VariableContext';
 
-const MoveToProject = ({ project, name }) => {
+const MoveToProject = ({ project, name, mode }) => {
   const { newProject } = useContext(VariableContext);
+  const textColor = mode ? 'white' : 'black';
   const history = useHistory();
   const openProject = () => {
     newProject(project);
@@ -13,8 +14,8 @@ const MoveToProject = ({ project, name }) => {
   };
   return (
     <>
-      <Button type="text" onClick={openProject}>
-        <h5>{name}</h5>
+      <Button style={{ color: textColor, fontSize: 'x-large' }} type="text" onClick={openProject}>
+        {name}
       </Button>
     </>
   );
@@ -23,6 +24,7 @@ const MoveToProject = ({ project, name }) => {
 MoveToProject.propTypes = {
   project: PropTypes.object,
   name: PropTypes.string,
+  mode: PropTypes.bool,
 };
 
 export default MoveToProject;

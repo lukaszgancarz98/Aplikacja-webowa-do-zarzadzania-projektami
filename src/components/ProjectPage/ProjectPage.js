@@ -4,6 +4,7 @@ import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Header } from 'antd/lib/layout/layout';
 import ProjectSettings from '../ProjectSettings/ProjectSettings';
 import ProjectFile from '../ProjectFile/ProjectFile';
 import { VariableContext } from '../VariableContext/VariableContext';
@@ -12,6 +13,7 @@ import ChangeTaskType from '../ChangeTaskType/ChangeTaskType';
 import ProjectPageActions from '../ProjectPageActions/ProjectPageActions';
 import { EmailContext } from '../EmailContext/EmailContext';
 import styles from './ProjectPage.module.css';
+import { DarkLightContext } from '../ContextDarkLightMode/ContextDarkLightMode';
 
 const { Title } = Typography;
 const { TabPane } = Tabs;
@@ -20,9 +22,10 @@ const ProjectPage = () => {
   const history = useHistory();
   const [tasks, setTasks] = useState();
   const { project, newProject, setUsers } = useContext(VariableContext);
-  console.log(project);
+  const { mode } = useContext(DarkLightContext);
   const { email } = useContext(EmailContext);
   const [secoundModal, setSecoundModal] = useState();
+  const textColor = mode ? 'white' : 'black';
   const secoundToggle = () => {
     setSecoundModal((previous) => !previous);
   };
@@ -116,7 +119,7 @@ const ProjectPage = () => {
   };
   const createdBy = (userName) => {
     if (userName !== '') {
-      return <>Stworzone przez {userName}</>;
+      return <>/{userName}</>;
     }
     return <></>;
   };
@@ -139,19 +142,24 @@ const ProjectPage = () => {
     }
   };
   return (
-    <>
-      <Button
-        type="primary"
-        shape="round"
-        style={{ background: 'green', borderColor: 'green' }}
-        onClick={() => backToProjects()}
-      >
-        Powrót
-      </Button>
+    <div className={mode ? styles.divdark : styles.divlight}>
+      <Header>
+        <Button
+          type="primary"
+          shape="round"
+          style={{ background: 'green', borderColor: 'green' }}
+          onClick={() => backToProjects()}
+        >
+          Powrót
+        </Button>
+      </Header>
       <Modal isOpen={secoundModal} toggle={secoundToggle}>
-        <ModalHeader toggle={secoundToggle}>{project.name}</ModalHeader>
-        <ModalBody>
+        <ModalHeader className={mode ? styles.modaldark : styles.modallight} toggle={secoundToggle}>
+          <span style={{ color: textColor }}>{project.name}</span>
+        </ModalHeader>
+        <ModalBody className={mode ? styles.modaldark : styles.modallight}>
           <AddingNewTask
+            mode={mode}
             email={email}
             getTasks={getTasks}
             secoundToggle={secoundToggle}
@@ -160,14 +168,16 @@ const ProjectPage = () => {
         </ModalBody>
       </Modal>
       <Tabs defaultActiveKey="1">
-        <TabPane tab="Projekt" key="1">
+        <TabPane tab={<span style={{ color: textColor }}>Projekt</span>} key="1">
           <div>
-            <Col className={styles.mainCol}>
+            <Col className={mode ? styles.mainColdark : styles.mainCollight}>
               <Row gutter={30}>
                 <Col className={styles.scroll}>
-                  <Card>
+                  <Card className={mode ? styles.carddark : styles.cardlight}>
                     <Row>
-                      <Title level={3}>Zaplanowane</Title>
+                      <Title level={3} style={{ color: textColor }}>
+                        Zaplanowane
+                      </Title>
                     </Row>
                     <InfiniteScroll
                       dataLength={isNew(getTaskForView(tasks)).length}
@@ -178,14 +188,18 @@ const ProjectPage = () => {
                     >
                       {isNew(getTaskForView(tasks)).map((item) => (
                         <List.Item>
-                          <Card className={styles.card}>
+                          <Card className={mode ? styles.itemsdark : styles.itemslight}>
                             <Row justify="end">
-                              <ProjectPageActions item={item} getTasks={getTasks} />
+                              <ProjectPageActions
+                                mode={textColor}
+                                item={item}
+                                getTasks={getTasks}
+                              />
                             </Row>
                             <Popover placement="left" content="xd" trigger="hover">
-                              <h6>{item.taskname}</h6>
+                              <h4 style={{ color: textColor }}>{item.taskname}</h4>
                             </Popover>
-                            <p>
+                            <p style={{ color: textColor }}>
                               Utworzono:{' '}
                               {answer(
                                 Math.floor(
@@ -197,8 +211,8 @@ const ProjectPage = () => {
                                 )
                               )}
                             </p>
-                            <p>{createdBy(item.createdby)}</p>
-                            <ChangeTaskType item={item} getTasks={getTasks} />
+                            <p style={{ color: textColor }}>{createdBy(item.createdby)}</p>
+                            <ChangeTaskType mode={textColor} item={item} getTasks={getTasks} />
                           </Card>
                         </List.Item>
                       ))}
@@ -215,8 +229,10 @@ const ProjectPage = () => {
                 </Col>
                 <Space />
                 <Col className={styles.scroll}>
-                  <Card>
-                    <Title level={3}>Realizowane</Title>
+                  <Card className={mode ? styles.carddark : styles.cardlight}>
+                    <Title level={3} style={{ color: textColor }}>
+                      Realizowane
+                    </Title>
                     <InfiniteScroll
                       dataLength={isInProgress(getTaskForView(tasks)).length}
                       next={handleInfinitedOnLoadisInProgress(isInProgress(getTaskForView(tasks)))}
@@ -226,9 +242,13 @@ const ProjectPage = () => {
                     >
                       {isInProgress(getTaskForView(tasks)).map((item) => (
                         <List.Item>
-                          <Card className={styles.card}>
+                          <Card className={mode ? styles.itemsdark : styles.itemslight}>
                             <Row justify="end">
-                              <ProjectPageActions item={item} getTasks={getTasks} />
+                              <ProjectPageActions
+                                mode={textColor}
+                                item={item}
+                                getTasks={getTasks}
+                              />
                             </Row>
                             <Popover placement="left" content="xd" trigger="hover">
                               <h6>{item.taskname}</h6>
@@ -246,7 +266,7 @@ const ProjectPage = () => {
                               )}
                             </p>
                             <p>{createdBy(item.createdby)}</p>
-                            <ChangeTaskType item={item} getTasks={getTasks} />
+                            <ChangeTaskType mode={textColor} item={item} getTasks={getTasks} />
                           </Card>
                         </List.Item>
                       ))}
@@ -255,8 +275,10 @@ const ProjectPage = () => {
                 </Col>
                 <Space />
                 <Col className={styles.scroll}>
-                  <Card>
-                    <Title level={3}>Zrealizowane</Title>
+                  <Card className={mode ? styles.carddark : styles.cardlight}>
+                    <Title level={3} style={{ color: textColor }}>
+                      Zrealizowane
+                    </Title>
                     <InfiniteScroll
                       dataLength={isDone(getTaskForView(tasks)).length}
                       next={handleInfinitedOnLoadisDone(isDone(getTaskForView(tasks)))}
@@ -266,9 +288,13 @@ const ProjectPage = () => {
                     >
                       {isDone(getTaskForView(tasks)).map((item) => (
                         <List.Item>
-                          <Card className={styles.card}>
+                          <Card className={mode ? styles.itemsdark : styles.itemslight}>
                             <Row justify="end">
-                              <ProjectPageActions item={item} getTasks={getTasks} />
+                              <ProjectPageActions
+                                mode={textColor}
+                                item={item}
+                                getTasks={getTasks}
+                              />
                             </Row>
                             <Popover placement="left" content="xd" trigger="hover">
                               <h6>{item.taskname}</h6>
@@ -286,7 +312,7 @@ const ProjectPage = () => {
                               )}
                             </p>
                             <p>{createdBy(item.createdby)}</p>
-                            <ChangeTaskType item={item} getTasks={getTasks} />
+                            <ChangeTaskType mode={textColor} item={item} getTasks={getTasks} />
                           </Card>
                         </List.Item>
                       ))}
@@ -297,14 +323,19 @@ const ProjectPage = () => {
             </Col>
           </div>
         </TabPane>
-        <TabPane tab={projectName} key="2">
-          <ProjectSettings project={project} getProjects={getProjects} getUsers={getUsers} />
+        <TabPane tab={<span style={{ color: textColor }}>{projectName}</span>} key="2">
+          <ProjectSettings
+            mode={mode}
+            project={project}
+            getProjects={getProjects}
+            getUsers={getUsers}
+          />
         </TabPane>
-        <TabPane tab="txt" key="3">
+        <TabPane tab={<span style={{ color: textColor }}>Plik</span>} key="3">
           <ProjectFile project={project} />
         </TabPane>
       </Tabs>
-    </>
+    </div>
   );
 };
 

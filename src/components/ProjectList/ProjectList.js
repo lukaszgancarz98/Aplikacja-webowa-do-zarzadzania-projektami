@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useContext } from 'react';
 import { List, Card, Row, Col } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import PropTypes from 'prop-types';
@@ -8,9 +8,12 @@ import UsersInProjectList from '../UsersInProjectList/UsersInProjectList';
 import LastTimeUpdateDisplay from '../LastTimeUpdateDisplay/LastTimeUpdateDisplay';
 import DeleteProject from '../DeleteProject/DeleteProject';
 import Chat from '../Chat/Chat';
+import { DarkLightContext } from '../ContextDarkLightMode/ContextDarkLightMode';
 
 const ProjectList = ({ projects = [], getProjects }) => {
+  const { mode } = useContext(DarkLightContext);
   const [hasMore, setHasMore] = useState(true);
+  const textColor = mode ? 'white' : 'black';
   const handleInfinitedOnLoad = () => {
     if (projects.lenght > 4) {
       setHasMore((previous) => !previous);
@@ -18,7 +21,7 @@ const ProjectList = ({ projects = [], getProjects }) => {
   };
   return (
     <div>
-      <div className={styles.list}>
+      <div className={mode ? styles.listlight : styles.listdark}>
         <InfiniteScroll
           dataLength={projects.length}
           next={handleInfinitedOnLoad}
@@ -30,22 +33,22 @@ const ProjectList = ({ projects = [], getProjects }) => {
             dataSource={projects}
             renderItem={(item) => (
               <List.Item>
-                <Card className={styles.card}>
+                <Card className={mode ? styles.cardlight : styles.carddark}>
                   <Row>
                     <Col>
-                      <MoveToProject project={item} name={item.name} />
+                      <MoveToProject mode={mode} project={item} name={item.name} />
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <p>{item.description}</p>
-                      <DeleteProject item={item} getProjects={getProjects} />
+                      <p style={{ color: textColor }}>{item.description}</p>
+                      <DeleteProject mode={mode} item={item} getProjects={getProjects} />
                     </Col>
                     <Col>
-                      <UsersInProjectList project={item} />
+                      <UsersInProjectList mode={mode} project={item} />
                     </Col>
                     <Col>
-                      <LastTimeUpdateDisplay update={item.update} />
+                      <LastTimeUpdateDisplay mode={mode} update={item.update} />
                     </Col>
                   </Row>
                 </Card>

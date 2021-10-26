@@ -24,7 +24,6 @@ const Chat = () => {
   }, []);
   if (users) {
     const user = users.find((item) => item.email === email);
-    console.log(user);
     if (user.friends !== null && user.friends !== '') {
       const friends = user.friends.split(',').filter((friend) => friend !== '');
       return (

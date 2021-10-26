@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Button, Input } from 'antd';
 import PropTypes from 'prop-types';
+import styles from './AddingNewTask.module.css';
 
-const AddingNewTask = ({ project, secoundToggle, getTasks, email }) => {
+const AddingNewTask = ({ project, secoundToggle, getTasks, email, mode }) => {
   const [taskName] = useState();
   const createTask = (value) => {
     fetch('http://localhost:3000/createtask', {
@@ -38,8 +39,11 @@ const AddingNewTask = ({ project, secoundToggle, getTasks, email }) => {
           taskName,
         }}
       >
-        <Form.Item label="Nazwa zadania" name="taskName">
-          <Input />
+        <Form.Item
+          label={<span className={mode ? styles.divdark : styles.divlight}>Nazwa zadania</span>}
+          name="taskName"
+        >
+          <Input className={mode ? styles.inputdark : styles.inputlight} />
         </Form.Item>
         <Form.Item>
           <Button
@@ -61,6 +65,7 @@ AddingNewTask.propTypes = {
   secoundToggle: PropTypes.func,
   getTasks: PropTypes.func,
   email: PropTypes.string,
+  mode: PropTypes.bool,
 };
 
 export default AddingNewTask;

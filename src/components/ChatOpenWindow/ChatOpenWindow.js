@@ -12,11 +12,13 @@ import ChatText from '../ChatText/ChatText';
 import FindNameByEmail from '../FindNameByEmail/FindNameByEmail';
 import { ChatContext } from '../ChatContext/ChatContext';
 
-const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMessages }) => {
+const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMessages, mode }) => {
   const [messageToSaveOne] = useState();
   const [messageToSaveTwo] = useState();
   const [receiver, setReceiver] = useState();
   const [form] = Form.useForm();
+  const textColor = mode ? 'white' : 'black';
+  const backgroundColor = mode ? 'black' : 'white';
   const { modalOne, modalTwo, openChat, changeFlagOne, changeFlagTwo } = useContext(ChatContext);
   const chatStyles = {
     chatStylesOne: {
@@ -43,11 +45,13 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
       position: 'fixed',
       bottom: '2%',
       right: '17.00%',
+      color: textColor,
     },
     buttonsendTwo: {
       position: 'fixed',
       bottom: '2%',
       right: '33.02%',
+      color: textColor,
     },
     buttonCloseModalOne: {
       position: 'fixed',
@@ -137,9 +141,9 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
         }
         openchatsOne = (
           <div style={mainStyles[0]}>
-            <Row className={styles.userstyles}>
+            <Row className={mode ? styles.userstylesdark : styles.userstyleslight}>
               <Col span={8}>
-                <h5 style={{ paddingLeft: '10%', width: '150%' }}>
+                <h5 style={{ paddingLeft: '10%', width: '150%', color: textColor }}>
                   <FindNameByEmail users={users} email={openChatArray[0]} />
                 </h5>
               </Col>
@@ -160,18 +164,19 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
                   onClick={() => deleteWindowChat(openChatArray[0])}
                   style={{ fontSize: 'large' }}
                 >
-                  <CloseSquareOutlined />
+                  <CloseSquareOutlined style={{ color: textColor }} />
                 </Button>
               </Col>
             </Row>
             <ChatText
+              mode={mode}
               messages={messages}
               users={users}
               email={email}
               userName={users.find((user) => user.email === openChatArray[0])}
               getMessages={getMessages}
             />
-            <Row style={{ height: '16%', backgroundColor: 'brown' }}>
+            <Row style={{ height: '16%', backgroundColor }}>
               <Form
                 initialValues={{
                   messageToSaveOne,
@@ -180,7 +185,7 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
                 onFinish={addMessage}
               >
                 <Form.Item name="messageToSaveOne">
-                  <Input className={styles.messageinput} />
+                  <Input className={mode ? styles.inputlight : styles.inputdark} />
                 </Form.Item>
                 <Form.Item>
                   <Button
@@ -189,7 +194,7 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
                     style={secondaryStyles[0]}
                     onClick={() => onClick(openChatArray[0])}
                   >
-                    <PlusCircleOutlined style={{ fontSize: 'large' }} />
+                    <PlusCircleOutlined style={{ fontSize: 'x-large' }} />
                   </Button>
                 </Form.Item>
               </Form>
@@ -270,7 +275,7 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
                   onFinish={addMessage}
                 >
                   <Form.Item name="messageToSaveTwo">
-                    <Input className={styles.messageinput} />
+                    <Input className={mode ? styles.inputlight : styles.inputdark} />
                   </Form.Item>
                   <Form.Item>
                     <Button
@@ -279,7 +284,7 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
                       style={secondaryStyles[1]}
                       onClick={() => onClick(openChatArray[1])}
                     >
-                      <PlusCircleOutlined style={{ fontSize: 'large' }} />
+                      <PlusCircleOutlined />
                     </Button>
                   </Form.Item>
                 </Form>
@@ -328,6 +333,7 @@ ChatOpenWindow.propTypes = {
   deleteWindowChat: PropTypes.func,
   messages: PropTypes.object,
   getMessages: PropTypes.func,
+  mode: PropTypes.bool,
 };
 
 export default ChatOpenWindow;

@@ -3,8 +3,9 @@ import { Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-const LastTimeUpdateDisplay = ({ update }) => {
+const LastTimeUpdateDisplay = ({ update, mode }) => {
   let updateDisplay = <></>;
+  const textColor = mode ? 'white' : 'black';
   if (update !== undefined && update !== null) {
     updateDisplay = (
       <>
@@ -15,11 +16,12 @@ const LastTimeUpdateDisplay = ({ update }) => {
       </>
     );
   }
-  return <>{updateDisplay}</>;
+  return <p style={{ color: textColor }}>{updateDisplay}</p>;
 };
 
 LastTimeUpdateDisplay.propTypes = {
   update: PropTypes.string,
+  mode: PropTypes.bool,
 };
 
 export default LastTimeUpdateDisplay;

@@ -1,14 +1,18 @@
 import React, { useState, useContext } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Space, Typography } from 'antd';
 import PropTypes from 'prop-types';
 import { VariableContext } from '../VariableContext/VariableContext';
+import styles from '../UserSettings/UserSettings.module.css';
 
-const ChangeNamePassw = ({ pass, email, getUsers }) => {
+const { Text } = Typography;
+
+const ChangeNamePassw = ({ pass, email, getUsers, mode }) => {
   const [password] = useState();
   const [repPassword] = useState();
   const [newPassword] = useState();
   const [newNameUser] = useState();
   const { newName } = useContext(VariableContext);
+  const textColor = mode ? 'white' : 'black';
   const changePassword = (values) => {
     if (pass === values.password && pass === values.repPassword) {
       const AddNewPassword = values.newPassword;
@@ -65,21 +69,27 @@ const ChangeNamePassw = ({ pass, email, getUsers }) => {
           newPassword,
         }}
       >
-        <Form.Item label="Stare hasło" name="password">
-          <Input />
+        <Form.Item label={<span style={{ color: textColor }}>Stare hasło</span>} name="password">
+          <Input className={mode ? styles.buttonlight : styles.buttondark} />
         </Form.Item>
-        <Form.Item label="Powtórz stare hasło" name="repPassword">
-          <Input />
+        <Form.Item
+          label={<span style={{ color: textColor }}>Powtórz hasło</span>}
+          name="repPassword"
+        >
+          <Input className={mode ? styles.buttonlight : styles.buttondark} />
         </Form.Item>
-        <Form.Item label="Nowe hasło" name="newPassword">
-          <Input />
+        <Form.Item label={<span style={{ color: textColor }}>Nowe hasło</span>} name="newPassword">
+          <Input className={mode ? styles.buttonlight : styles.buttondark} />
         </Form.Item>
         <Form.Item>
-          <Button htmlType="submit">OK</Button>
+          <Button className={mode ? styles.buttonlight : styles.buttondark} htmlType="submit">
+            OK
+          </Button>
         </Form.Item>
       </Form>
       <Form
         onFinish={changeName}
+        className={mode ? styles.modallight : styles.modaldark}
         labelCol={{
           span: 7,
         }}
@@ -90,11 +100,16 @@ const ChangeNamePassw = ({ pass, email, getUsers }) => {
           newNameUser,
         }}
       >
-        <Form.Item label="Nowa nazwa użytkownika" name="newNameUser">
-          <Input />
+        <Form.Item
+          label={<span style={{ color: textColor }}>Nowa nazwa użytkownika</span>}
+          name="newNameUser"
+        >
+          <Input className={mode ? styles.inputlight : styles.inputdark} />
         </Form.Item>
         <Form.Item>
-          <Button htmlType="submit">OK</Button>
+          <Button className={mode ? styles.buttonlight : styles.buttondark} htmlType="submit">
+            OK
+          </Button>
         </Form.Item>
       </Form>
     </>
@@ -105,6 +120,7 @@ ChangeNamePassw.propTypes = {
   email: PropTypes.string,
   getUsers: PropTypes.func,
   pass: PropTypes.string,
+  mode: PropTypes.bool,
 };
 
 export default ChangeNamePassw;

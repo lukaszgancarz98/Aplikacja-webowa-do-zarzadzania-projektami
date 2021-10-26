@@ -5,8 +5,10 @@ import moment from 'moment';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styles from './ChatText.module.css';
 
-const ChatText = ({ userName, users = [], email, messages, getMessages }) => {
+const ChatText = ({ userName, users = [], email, messages, getMessages, mode }) => {
   const [hasMore, setHasMore] = useState(true);
+  const textColor = mode ? 'white' : 'black';
+  const backgroundColor = mode ? 'black' : 'white';
   useEffect(() => {
     getMessages();
   }, []);
@@ -33,32 +35,38 @@ const ChatText = ({ userName, users = [], email, messages, getMessages }) => {
         sender = true;
       }
       const leftSite = (
-        <div className={styles.divChatLeft}>
+        <div className={mode ? styles.divChatLeftdark : styles.divChatLeftlight}>
           <Popover
             placement="left"
             content={<h6>{moment(new Date(message.time)).format('HH:mm')}</h6>}
           >
             <Row>
-              <p className={styles.leftSite}>{searchUser(message.sender)}</p>
+              <p className={mode ? styles.leftSitedark : styles.leftSitelight}>
+                {searchUser(message.sender)}
+              </p>
             </Row>
             <Row>
-              <p className={styles.leftSiteMessage}>{message.message}</p>
+              <p className={mode ? styles.leftSiteMessagedark : styles.leftSiteMessagelight}>
+                {message.message}
+              </p>
             </Row>
           </Popover>
         </div>
       );
       const rightSite = (
         <>
-          <div className={styles.divChatRight}>
+          <div className={mode ? styles.divChatRightdark : styles.divChatRightlight}>
             <Popover
               placement="right"
               content={<h6>{moment(new Date(message.time)).format('HH:mm')}</h6>}
             >
               <Row>
-                <p className={styles.rightSite}>Me</p>
+                <p className={mode ? styles.rightSitedark : styles.rightSitelight}>Me</p>
               </Row>
               <Row>
-                <p className={styles.rightSiteMessage}>{message.message}</p>
+                <p className={mode ? styles.rightSiteMessagedark : styles.rightSiteMessagelight}>
+                  {message.message}
+                </p>
               </Row>
             </Popover>
           </div>
@@ -74,13 +82,14 @@ const ChatText = ({ userName, users = [], email, messages, getMessages }) => {
     const timeOfLastMessage = () => {
       const listLength = connectSearchedMessages.length;
       if (connectSearchedMessages === undefined) {
+        console.log(moment(new Date(connectSearchedMessages[listLength - 1].time)).format('HH:mm'));
         return moment(new Date(connectSearchedMessages[listLength - 1].time)).format('HH:mm');
       }
       return <></>;
     };
     return (
       <>
-        <Row>
+        <Row style={{ height: '21.7vh', backgroundColor }}>
           <InfiniteScroll
             dataLength={connectSearchedMessages.length}
             next={handleInfinitedOnLoad}
@@ -92,10 +101,9 @@ const ChatText = ({ userName, users = [], email, messages, getMessages }) => {
             <p
               style={{
                 textAlign: 'center',
-                paddingBottom: '5px',
-                paddingTop: '5px',
                 fontSize: 'x-small',
-                height: '2px',
+                height: '3px',
+                color: textColor,
               }}
             >
               {timeOfLastMessage()}
@@ -121,6 +129,7 @@ ChatText.propTypes = {
   email: PropTypes.string,
   messages: PropTypes.object,
   getMessages: PropTypes.func,
+  mode: PropTypes.bool,
 };
 
 export default ChatText;

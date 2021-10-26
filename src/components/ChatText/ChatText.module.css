@@ -1,14 +1,32 @@
-  .divChatLeft {
+  .divChatLeftdark {
+    width: 70%;
+    margin-left: 0;
+    margin-right: auto;
+    border: 1px solid rgb(65, 65, 65);
+    border-radius: 20px;
+    background-color: rgb(65, 65, 65);
+  }
+
+  .divChatRightdark {
+    background-color: rgb(65, 65, 65);
+    width: 70%;
+    margin-left: auto;
+    margin-right: 0;
+    border: 1px solid rgb(65, 65, 65);
+    border-radius: 20px;
+  }
+
+  .divChatLeftlight {
     width: 70%;
     margin-left: 0;
     margin-right: auto;
     border: 1px solid gray;
     border-radius: 20px;
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(67, 67, 192);
   }
 
-  .divChatRight {
-    background-color: lightblue;
+  .divChatRightlight {
+    background-color: rgb(67, 67, 192);
     width: 70%;
     margin-left: auto;
     margin-right: 0;
@@ -16,24 +34,50 @@
     border-radius: 20px;
   }
 
-  .leftSite {
+  .leftSitedark {
+    padding-left: 10%;
+    height: 1px;
+    font-size: x-small;
+    color: white;
+  }
+
+  .leftSitelight {
     padding-left: 10%;
     height: 1px;
     font-size: x-small;
   }
 
-  .leftSiteMessage {
+  .leftSiteMessagedark {
+    padding-left: 5%;
+    height: auto;
+    color: white;
+  }
+
+  .leftSiteMessagelight {
     padding-left: 5%;
     height: auto;
   }
 
-  .rightSite {
+  .rightSitedark {
     padding-left: 10%;
-    height: 1px;
+    height: 1px; 
+    font-size: x-small;
+    color: white;
+  }
+
+  .rightSitelight {
+    padding-left: 10%;
+    height: 1px; 
     font-size: x-small;
   }
 
-  .rightSiteMessage {
+  .rightSiteMessagedark {
+    padding-left: 5%;
+    height: auto;
+    color: white;
+  }
+
+  .rightSiteMessagelight {
     padding-left: 5%;
     height: auto;
   }

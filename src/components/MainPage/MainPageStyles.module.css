@@ -16,3 +16,15 @@
 .buttoncreate{
     padding-left: 60%;
 }
+
+.divlight {
+    background-color: rgb(15, 15, 15);
+    width: 100vw;
+    height: 100vh;
+}
+
+.divdark {
+    background-color: rgb(248, 239, 228);
+    width: 100vw;
+    height: 100vh;
+}

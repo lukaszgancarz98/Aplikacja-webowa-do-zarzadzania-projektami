@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Input, Row, Col, Typography, Space, Tooltip, Tabs, Card } from 'antd';
-import { Modal, ModalHeader } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { EmailContext } from '../EmailContext/EmailContext';
 import { VariableContext } from '../VariableContext/VariableContext';
+import styles from './ProjectSettings.module.css';
 
 const { Text } = Typography;
 const { TabPane } = Tabs;
@@ -19,6 +20,7 @@ const Users = ({
   owner,
   getProjects,
   getUsers,
+  mode,
 }) => {
   console.log(restOfFriends);
   const { email } = useContext(EmailContext);
@@ -105,7 +107,7 @@ const Users = ({
   let disusersList = <></>;
   if (email === owner && arrFilter !== '') {
     disusersList = (
-      <Row>
+      <Row className={mode ? styles.inputdark : styles.inputlight}>
         <Space direction="vertical">
           {arrFilter.map((item) => (
             <Text>
@@ -122,7 +124,7 @@ const Users = ({
     );
   } else if (email !== owner && arrFilter !== '') {
     disusersList = (
-      <Row>
+      <Row className={mode ? styles.inputdark : styles.inputlight}>
         <Space direction="vertical">
           {arrFilter.map((item) => (
             <Text>{displayUsers(item)}</Text>
@@ -131,18 +133,26 @@ const Users = ({
       </Row>
     );
   } else {
-    disusersList = <>Tutaj nikogo nie ma! </>;
+    disusersList = (
+      <span className={mode ? styles.formtextdark : styles.formtextlight}>
+        Tutaj nikogo nie ma!{' '}
+      </span>
+    );
   }
   let friendList = <></>;
   if (restOfFriends.length === undefined || restOfFriends.length === 0) {
-    friendList = <>Nie masz żadnych znajomych</>;
+    friendList = (
+      <span className={mode ? styles.formtextdark : styles.formtextlight}>
+        Nie masz żadnych znajomych
+      </span>
+    );
   } else {
     friendList = (
-      <>
+      <span className={mode ? styles.inputdark : styles.inputlight}>
         {restOfFriends.map((user) => (
           <>
             <Space direction="horizontal">
-              <Text>{user}</Text>
+              <Text className={mode ? styles.formtextdark : styles.formtextlight}>{user}</Text>
               <Tooltip title="Dodaj" placement="right">
                 <Button type="text" onClick={() => addUser(user)}>
                   <PlusOutlined />
@@ -151,26 +161,43 @@ const Users = ({
             </Space>
           </>
         ))}
-      </>
+      </span>
     );
   }
   let addUserButton = <></>;
   if (email === owner) {
     addUserButton = (
       <>
-        <Button onClick={() => toggle()}>Dodaj użytkownika</Button>
+        <Button type="text" onClick={() => toggle()}>
+          Dodaj użytkownika
+        </Button>
         <Modal isOpen={modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}>
+          <ModalBody toggle={toggle} className={mode ? styles.inputdark : styles.inputlight}>
             <Tabs defaultActiveKey="1">
-              <TabPane tab="Znajomi" key="1">
+              <TabPane
+                tab={
+                  <span className={mode ? styles.formtextdark : styles.formtextlight}>Znajomi</span>
+                }
+                key="1"
+                style={{ width: '200%' }}
+              >
                 <Space direction="vertical">{friendList}</Space>
               </TabPane>
-              <TabPane tab="Użytkownicy" key="2">
+              <TabPane
+                tab={
+                  <span className={mode ? styles.formtextdark : styles.formtextlight}>
+                    Użytkownicy
+                  </span>
+                }
+                key="2"
+              >
                 <Space direction="vertical">
                   {restOfUsers.map((user) => (
                     <Row>
                       <Space direction="horizontal">
-                        <Text>{user.email}</Text>
+                        <Text className={mode ? styles.formtextdark : styles.formtextlight}>
+                          {user.email}
+                        </Text>
                         <Tooltip title="Dodaj" placement="right">
                           <Button type="text" onClick={() => addUser(user)}>
                             <PlusOutlined />
@@ -182,24 +209,27 @@ const Users = ({
                 </Space>
               </TabPane>
             </Tabs>
-          </ModalHeader>
+          </ModalBody>
         </Modal>
       </>
     );
   }
   return (
-    <>
-      <Space direction="vertical">
-        <Card title="Użytkownicy">
-          {disusersList}
-          {addUserButton}
-        </Card>
-      </Space>
-    </>
+    <div>
+      <Card
+        className={mode ? styles.divdark : styles.divlight}
+        title={
+          <span className={mode ? styles.formtextdark : styles.formtextlight}>Użytkownicy</span>
+        }
+      >
+        {disusersList}
+        {addUserButton}
+      </Card>
+    </div>
   );
 };
 
-const ProjectSettings = ({ project, getProjects, getUsers }) => {
+const ProjectSettings = ({ project, getProjects, getUsers, mode }) => {
   const { email } = useContext(EmailContext);
   const { users } = useContext(VariableContext);
   const [projectName] = useState(project.name);
@@ -243,8 +273,8 @@ const ProjectSettings = ({ project, getProjects, getUsers }) => {
   return (
     <>
       <Row>
-        <Col>
-          Edytuj projekt
+        <Col className={mode ? styles.colformdark : styles.colformlight}>
+          <h4 className={mode ? styles.formtextdark : styles.formtextlight}>Edytuj projekt</h4>
           <Form
             onFinish={editProject}
             labelCol={{
@@ -258,11 +288,25 @@ const ProjectSettings = ({ project, getProjects, getUsers }) => {
               projectDescription,
             }}
           >
-            <Form.Item label="Nazwa projektu" name="projectName">
-              <Input />
+            <Form.Item
+              label={
+                <span className={mode ? styles.formtextdark : styles.formtextlight}>
+                  Nazwa projektu
+                </span>
+              }
+              name="projectName"
+            >
+              <Input className={mode ? styles.inputdark : styles.inputlight} />
             </Form.Item>
-            <Form.Item label="Opis projektu" name="projectDescription">
-              <Input />
+            <Form.Item
+              label={
+                <span className={mode ? styles.formtextdark : styles.formtextlight}>
+                  Opis projektu
+                </span>
+              }
+              name="projectDescription"
+            >
+              <Input className={mode ? styles.inputdark : styles.inputlight} />
             </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit" style={{ float: 'right' }}>
@@ -272,6 +316,7 @@ const ProjectSettings = ({ project, getProjects, getUsers }) => {
           </Form>
         </Col>
         <Users
+          mode={mode}
           items={splitList}
           users={users}
           list={list}
@@ -297,11 +342,13 @@ Users.propTypes = {
   getProjects: PropTypes.func,
   getUsers: PropTypes.func,
   restOfFriends: PropTypes.array,
+  mode: PropTypes.bool,
 };
 
 ProjectSettings.propTypes = {
   project: PropTypes.object,
   getProjects: PropTypes.func,
   getUsers: PropTypes.func,
+  mode: PropTypes.bool,
 };
 export default ProjectSettings;

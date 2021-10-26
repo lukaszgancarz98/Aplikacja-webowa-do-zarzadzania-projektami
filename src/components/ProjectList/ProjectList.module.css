@@ -1,10 +1,22 @@
-.list{
+.listlight{
     width: 100%;
     background-color: rgb(49, 47, 47);
 }
 
-.card{
-    background-color: rgb(83, 79, 79);
+.listdark{
+    width: 100%;
+    background-color: rgb(49, 47, 47);
+}
+
+.cardlight{
+    background-color: rgb(15, 15, 15);
+    border-color: white;
+    width: 90%;
+    left: 5%;
+}
+
+.carddark{
+    background-color: white;
     border-color: black;
     width: 90%;
     left: 5%;

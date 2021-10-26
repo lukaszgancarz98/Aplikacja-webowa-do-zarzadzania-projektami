@@ -6,10 +6,11 @@ import styles from '../UserSettings/UserSettings.module.css';
 
 const { Text } = Typography;
 
-const FriendList = ({ users = [], email, getUsers }) => {
+const FriendList = ({ users = [], email, getUsers, mode }) => {
   const [hasMore, setHasMore] = useState(true);
   const userData = (users = []) => users.filter((user) => user.email === email);
   const currentData = userData(users);
+  const textColor = mode ? 'white' : 'black';
   let friendListArray;
   if (currentData) {
     if (currentData[0].friends) {
@@ -104,8 +105,8 @@ const FriendList = ({ users = [], email, getUsers }) => {
     if (friendListArray.length <= 6) {
       friendslist = (
         <>
-          <Card className={styles.friendlist}>
-            <h5>Znajomi:</h5>
+          <Card className={mode ? styles.friendlistlight : styles.friendlistdark}>
+            <h5 style={{ color: textColor }}>Znajomi:</h5>
             <Space direction="vertical">
               {friendListArray.map((item) => (
                 <>
@@ -121,7 +122,7 @@ const FriendList = ({ users = [], email, getUsers }) => {
                       }
                       trigger="hover"
                     >
-                      <Text>{searchName(item)}</Text>
+                      <Text style={{ color: textColor }}>{searchName(item)}</Text>
                     </Popover>
                   </Space>
                 </>
@@ -133,8 +134,8 @@ const FriendList = ({ users = [], email, getUsers }) => {
     } else if (friendListArray.length > 6) {
       friendslist = (
         <>
-          <Card className={styles.friendlist}>
-            <h5>Znajomi:</h5>
+          <Card className={mode ? styles.friendlistlight : styles.friendlistdark}>
+            <h5 styles={{ color: 'white' }}>Znajomi:</h5>
             <InfiniteScroll
               dataLength={friendListArray.length}
               next={handleInfinitedOnLoad}
@@ -185,6 +186,7 @@ FriendList.propTypes = {
   users: PropTypes.object,
   email: PropTypes.string,
   getUsers: PropTypes.func,
+  mode: PropTypes.bool,
 };
 
 export default FriendList;

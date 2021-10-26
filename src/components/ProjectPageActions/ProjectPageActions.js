@@ -3,7 +3,7 @@ import { Button, Tag, Dropdown, Menu } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 
-const ProjectPageActions = ({ item = [], getTasks }) => {
+const ProjectPageActions = ({ item = [], getTasks, mode }) => {
   const deleteTask = (value) => {
     fetch('http://localhost:3000/deletetask', {
       method: 'post',
@@ -29,16 +29,15 @@ const ProjectPageActions = ({ item = [], getTasks }) => {
   return (
     <Dropdown
       overlay={
-        <Menu onClick={onClick}>
-          <Menu.Item key="1">
-            <Tag color="red">Usuń</Tag>
-          </Menu.Item>
-        </Menu>
+        <Button type="text" style={{ backgroundColor: mode }}>
+          Usuń
+        </Button>
       }
+      overlayStyle={{ backgroundColor: mode }}
       trigger={['click']}
     >
       <Button type="text">
-        <PlusOutlined />
+        <PlusOutlined style={{ color: mode }} />
       </Button>
     </Dropdown>
   );
@@ -47,6 +46,7 @@ const ProjectPageActions = ({ item = [], getTasks }) => {
 ProjectPageActions.propTypes = {
   item: PropTypes.object,
   getTasks: PropTypes.func,
+  mode: PropTypes.string,
 };
 
 export default ProjectPageActions;

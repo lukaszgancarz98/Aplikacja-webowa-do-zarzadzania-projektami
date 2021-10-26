@@ -13,12 +13,14 @@ import ProjectList from '../ProjectList/ProjectList';
 import { VariableContext } from '../VariableContext/VariableContext';
 import UserSettings from '../UserSettings/UserSettings';
 import { ChatContext } from '../ChatContext/ChatContext';
+import { DarkLightContext } from '../ContextDarkLightMode/ContextDarkLightMode';
 
 const { TabPane } = Tabs;
 
 const MainPage = () => {
   const { email, setEmail } = useContext(EmailContext);
   const { name, setUsers, users } = useContext(VariableContext);
+  const { mode } = useContext(DarkLightContext);
   const { changeFlag, changeFlagOne, changeFlagTwo, setOpenChat } = useContext(ChatContext);
   const [modal, setModal] = useState();
   const [projects, setProjects] = useState();
@@ -48,6 +50,7 @@ const MainPage = () => {
         }
       });
   };
+  const textColor = mode ? 'white' : 'black';
   const getProjects = () => {
     fetch('http://localhost:3000/getprojects', {
       method: 'get',
@@ -75,7 +78,7 @@ const MainPage = () => {
     projects.filter((project) => project.owner === email || userCheck(project.users) === name);
   const title = <>Ustawienia {name}</>;
   return (
-    <>
+    <div className={mode ? styles.divlight : styles.divdark}>
       <Header>
         <Row>
           <Col>
@@ -86,7 +89,7 @@ const MainPage = () => {
         </Row>
       </Header>
       <Tabs defaultActiveKey="1">
-        <TabPane tab="Projekty" key="1">
+        <TabPane tab={<span style={{ color: textColor }}>Projekty</span>} key="1">
           <Row>
             <Col className={styles.buttoncreate}>
               <Button
@@ -114,11 +117,11 @@ const MainPage = () => {
             </Col>
           </Row>
         </TabPane>
-        <TabPane tab={title} key="2">
+        <TabPane tab={<span style={{ color: textColor }}>{title}</span>} key="2">
           <UserSettings getUsers={getUsers} users={users} name={name} email={email} />
         </TabPane>
       </Tabs>
-    </>
+    </div>
   );
 };
 

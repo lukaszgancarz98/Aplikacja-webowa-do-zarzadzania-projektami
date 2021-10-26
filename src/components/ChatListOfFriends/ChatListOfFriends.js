@@ -6,9 +6,12 @@ import styles from './Chat.module.css';
 import FindNameByEmail from '../FindNameByEmail/FindNameByEmail';
 import ChatOpenWindow from '../ChatOpenWindow/ChatOpenWindow';
 import { ChatContext } from '../ChatContext/ChatContext';
+import { DarkLightContext } from '../ContextDarkLightMode/ContextDarkLightMode';
 
 const ChatListOfFriends = ({ users = [], friends, email }) => {
   const { show, changeFlag, openChat, setOpenChat } = useContext(ChatContext);
+  const { mode } = useContext(DarkLightContext);
+  const textColor = mode ? 'white' : 'black';
   const [messages, setMessages] = useState();
   const getMessages = () => {
     fetch('http://localhost:3000/messages', {
@@ -24,12 +27,11 @@ const ChatListOfFriends = ({ users = [], friends, email }) => {
   const chatWindow = (friend) => {
     const findUserByEmail = users.find((user) => user.email === friend);
     const isOpenChatAlready = openChat.split(',').find((item) => item === friend);
-    console.log(friend, openChat, isOpenChatAlready);
     if (isOpenChatAlready === undefined) {
       const saveEmail = findUserByEmail.email;
       setOpenChat(`${saveEmail},${openChat}`);
     } else {
-      console.log('hehe');
+      console.log('pop');
     }
   };
   const deleteWindowChat = (somebody) => {
@@ -57,14 +59,23 @@ const ChatListOfFriends = ({ users = [], friends, email }) => {
   if (show === false) {
     chat = (
       <>
-        <Button className={styles.friendlistclosed} onClick={() => changeFlag(show)}>
+        <Button
+          className={mode ? styles.friendlistcloseddark : styles.friendlistclosedlight}
+          onClick={() => changeFlag(show)}
+        >
           <Row style={{ height: '20px' }}>
             <Col>
-              <h6 style={{ position: 'fixed', bottom: '1%' }}>{title}</h6>
+              <h6 style={{ position: 'fixed', bottom: '1%', color: textColor }}>{title}</h6>
             </Col>
             <Col>
               <PlusSquareOutlined
-                style={{ position: 'fixed', right: '1.5%', bottom: '1.75%', fontSize: 'large' }}
+                style={{
+                  position: 'fixed',
+                  right: '1.5%',
+                  bottom: '1.75%',
+                  fontSize: 'large',
+                  color: textColor,
+                }}
               />
             </Col>
           </Row>
@@ -73,10 +84,10 @@ const ChatListOfFriends = ({ users = [], friends, email }) => {
     );
   } else if (show === true) {
     chat = (
-      <div className={styles.friendlistopen}>
-        <Row className={styles.userstyles}>
+      <div className={mode ? styles.friendlistopendark : styles.friendlistopenlight}>
+        <Row className={mode ? styles.userstylesdark : styles.userstyleslight}>
           <Col>
-            <h5 style={{ paddingLeft: '10%', width: '150%' }}>{title}</h5>
+            <h5 style={{ paddingLeft: '10%', width: '150%', color: textColor }}>{title}</h5>
           </Col>
           <Col style={{ paddingLeft: '55%' }}>
             <Button
@@ -106,6 +117,7 @@ const ChatListOfFriends = ({ users = [], friends, email }) => {
     <>
       {chat}
       <ChatOpenWindow
+        mode={mode}
         messages={messages}
         getMessages={getMessages}
         email={email}

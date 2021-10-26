@@ -3,7 +3,9 @@ import { Dropdown, Button, Menu, Tag } from 'antd';
 import PropTypes from 'prop-types';
 import { PlusOutlined } from '@ant-design/icons';
 
-const DeleteProject = ({ item = [], getProjects }) => {
+const DeleteProject = ({ item = [], getProjects, mode }) => {
+  const textColor = mode ? 'white' : 'black';
+  const backgroundColor = mode ? 'rgb(26, 26, 26)' : 'white';
   const deleteTask = (value) => {
     fetch('http://localhost:3000/deleteproject', {
       method: 'post',
@@ -42,16 +44,20 @@ const DeleteProject = ({ item = [], getProjects }) => {
   return (
     <Dropdown
       overlay={
-        <Menu onClick={onClick}>
-          <Menu.Item key="1">
-            <Tag color="red">Usuń</Tag>
-          </Menu.Item>
-        </Menu>
+        <Button
+          type="text"
+          style={{ backgroundColor, color: textColor }}
+          color="red"
+          onClick={() => onClick()}
+        >
+          Usuń
+        </Button>
       }
+      overlayStyle={{ borderRadius: '20px' }}
       trigger={['click']}
     >
       <Button type="text">
-        <PlusOutlined />
+        <PlusOutlined style={{ color: textColor }} />
       </Button>
     </Dropdown>
   );
@@ -60,6 +66,7 @@ const DeleteProject = ({ item = [], getProjects }) => {
 DeleteProject.propTypes = {
   item: PropTypes.object,
   getProjects: PropTypes.func,
+  mode: PropTypes.bool,
 };
 
 export default DeleteProject;

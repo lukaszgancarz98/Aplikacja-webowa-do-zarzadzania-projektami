@@ -2,18 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { Row, Space, Typography, Button } from 'antd';
 import PropTypes from 'prop-types';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { styles } from '@material-ui/pickers/views/Calendar/Calendar';
 
 const { Text } = Typography;
 
-const UsersInProjectList = ({ project = [] }) => {
+const UsersInProjectList = ({ project = [], mode }) => {
   const [users, setUsers] = useState();
   const [modal, setModal] = useState(false);
+  const textColor = mode ? 'white' : 'black';
   const toggle = () => {
     setModal((previous) => !previous);
   };
   let friendListArray;
   if (project.users) {
-    friendListArray = project.users.split(',').filter((item) => item !== '');
+    friendListArray = project.users.split(' ').filter((item) => item !== '');
+    console.log(friendListArray);
   }
   const getUsers = () => {
     fetch('http://localhost:3000/getusers', {
@@ -39,27 +42,30 @@ const UsersInProjectList = ({ project = [] }) => {
       const find = users.find((user) => user.email === value);
       let returning;
       if (find !== undefined) {
-        returning = find.user;
+        returning = find.user.replace(' ', '');
       } else {
         returning = '';
       }
+      console.log(returning, 'ok?');
       return returning;
     }
   };
   let friendslist = <></>;
   if (friendListArray !== null && friendListArray !== '' && friendListArray !== undefined) {
-    if (friendListArray.length <= 3) {
+    if (friendListArray.length === 0) {
+      friendslist = <></>;
+    } else if (friendListArray.length <= 3) {
       friendslist = (
         <>
           <Row>
-            <h6>Użytkownicy:</h6>
+            <h6 style={{ color: textColor }}>Użytkownicy:</h6>
           </Row>
           <Row>
             <Space direction="vertical">
               {friendListArray.map((item) => (
                 <>
                   <Space size={25} direction="horizontal">
-                    <Text>{searchName(item)}</Text>
+                    <Text style={{ color: textColor }}>{searchName(item)}</Text>
                   </Space>
                 </>
               ))}
@@ -71,7 +77,7 @@ const UsersInProjectList = ({ project = [] }) => {
       friendslist = (
         <>
           <Button onClick={toggle} shape="round">
-            Show ppl
+            Więcej
           </Button>
           <Modal isOpen={modal} toggle={toggle}>
             <ModalHeader toggle={toggle}>Użytkownicy:</ModalHeader>
@@ -80,7 +86,7 @@ const UsersInProjectList = ({ project = [] }) => {
                 {friendListArray.map((item) => (
                   <>
                     <Space size={25} direction="horizontal">
-                      <Text>{searchName(item)}</Text>
+                      <Text style={{ color: textColor }}>{searchName(item)}</Text>
                     </Space>
                   </>
                 ))}
@@ -96,6 +102,7 @@ const UsersInProjectList = ({ project = [] }) => {
 
 UsersInProjectList.propTypes = {
   project: PropTypes.object,
+  mode: PropTypes.bool,
 };
 
 export default UsersInProjectList;
