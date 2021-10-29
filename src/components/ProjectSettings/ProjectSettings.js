@@ -29,6 +29,7 @@ const Users = ({
   const toggle = () => {
     setModal((previous) => !previous);
   };
+  const textColor = mode ? 'white' : 'black';
   const deleteUser = (string) => {
     const action = list.replace(` ${string}`, '');
     fetch('http://localhost:3000/newusers', {
@@ -105,12 +106,12 @@ const Users = ({
     }
   };
   let disusersList = <></>;
-  if (email === owner && arrFilter !== '') {
+  if (email === owner && arrFilter.length !== 0) {
     disusersList = (
-      <Row className={mode ? styles.inputdark : styles.inputlight}>
+      <Row className={mode ? styles.displayusersdark : styles.displayuserslight}>
         <Space direction="vertical">
           {arrFilter.map((item) => (
-            <Text>
+            <Text style={{ color: textColor }}>
               {displayUsers(item)}
               <Tooltip title={`Usuń użytkownika ${displayUsers(item)}`}>
                 <Button type="text" onClick={() => deleteUser(item)}>
@@ -124,13 +125,15 @@ const Users = ({
     );
   } else if (email !== owner && arrFilter !== '') {
     disusersList = (
-      <Row className={mode ? styles.inputdark : styles.inputlight}>
-        <Space direction="vertical">
-          {arrFilter.map((item) => (
-            <Text>{displayUsers(item)}</Text>
-          ))}
-        </Space>
-      </Row>
+      <div className={mode ? styles.displayusersdark : styles.displayuserslight}>
+        <Row className={mode ? styles.inputdark : styles.inputlight}>
+          <Space direction="vertical">
+            {arrFilter.map((item) => (
+              <Text style={{ color: textColor }}>{displayUsers(item)}</Text>
+            ))}
+          </Space>
+        </Row>
+      </div>
     );
   } else {
     disusersList = (
@@ -148,19 +151,21 @@ const Users = ({
     );
   } else {
     friendList = (
-      <span className={mode ? styles.inputdark : styles.inputlight}>
-        {restOfFriends.map((user) => (
-          <>
-            <Space direction="horizontal">
-              <Text className={mode ? styles.formtextdark : styles.formtextlight}>{user}</Text>
-              <Tooltip title="Dodaj" placement="right">
-                <Button type="text" onClick={() => addUser(user)}>
-                  <PlusOutlined />
-                </Button>
-              </Tooltip>
-            </Space>
-          </>
-        ))}
+      <span>
+        <Space direction="vertical">
+          {restOfFriends.map((user) => (
+            <>
+              <Space direction="hotizontal">
+                <Text className={mode ? styles.formtextdark : styles.formtextlight}>{user}</Text>
+                <Tooltip title="Dodaj" placement="right">
+                  <Button type="text" onClick={() => addUser(user)}>
+                    <PlusOutlined />
+                  </Button>
+                </Tooltip>
+              </Space>
+            </>
+          ))}
+        </Space>
       </span>
     );
   }
@@ -168,7 +173,12 @@ const Users = ({
   if (email === owner) {
     addUserButton = (
       <>
-        <Button type="text" onClick={() => toggle()}>
+        <Button
+          type="text"
+          shape="round"
+          onClick={() => toggle()}
+          style={{ color: textColor, borderColor: 'white' }}
+        >
           Dodaj użytkownika
         </Button>
         <Modal isOpen={modal} toggle={toggle}>
@@ -309,7 +319,7 @@ const ProjectSettings = ({ project, getProjects, getUsers, mode }) => {
               <Input className={mode ? styles.inputdark : styles.inputlight} />
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit" style={{ float: 'right' }}>
+              <Button shape="round" type="primary" htmlType="submit" style={{ float: 'right' }}>
                 Zapisz
               </Button>
             </Form.Item>

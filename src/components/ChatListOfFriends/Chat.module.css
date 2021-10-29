@@ -112,7 +112,25 @@
     border-radius: 20px;
 }
 
-.firstClosedChat {
+.firstClosedChatdark {
+    position: fixed;
+    bottom: 1%;
+    right: 17%;
+    width: 15%;
+    border: 3px solid white;
+    background-color: black;
+}
+
+.secoundClosedChatdark {
+    position: fixed;
+    bottom: 1%;
+    right: 33%;
+    width: 15%;
+    border: 3px solid white;
+    background-color: black;
+}
+
+.firstClosedChatlight {
     position: fixed;
     bottom: 1%;
     right: 17%;
@@ -120,12 +138,46 @@
     border: 3px solid gray;
 }
 
-.secoundClosedChat {
+.secoundClosedChatlight {
     position: fixed;
     bottom: 1%;
     right: 33%;
     width: 15%;
     border: 3px solid gray;
+}
+
+.firstClosedChatdark:hover {
+    position: fixed;
+    bottom: 1%;
+    right: 17%;
+    width: 15%;
+    border: 3px solid white;
+    background-color: gray;
+}
+
+.secoundClosedChatdark:hover {
+    position: fixed;
+    bottom: 1%;
+    right: 33%;
+    width: 15%;
+    border: 3px solid white;
+    background-color: gray;
+}
+
+.firstClosedChatlight:hover {
+    position: fixed;
+    bottom: 1%;
+    right: 17%;
+    width: 15%;
+    border: 3px solid lightblue;
+}
+
+.secoundClosedChatlight:hover {
+    position: fixed;
+    bottom: 1%;
+    right: 33%;
+    width: 15%;
+    border: 3px solid lightblue;
 }
 
 .deletechatbutton {

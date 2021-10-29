@@ -95,7 +95,7 @@ const ChatListOfFriends = ({ users = [], friends, email }) => {
               onClick={() => changeFlag(show)}
               style={{ position: 'fixed', right: '1%', bottom: '27.75%', fontSize: 'large' }}
             >
-              <MinusSquareOutlined />
+              <MinusSquareOutlined style={{ color: textColor }} />
             </Button>
           </Col>
         </Row>

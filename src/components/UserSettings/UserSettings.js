@@ -7,6 +7,7 @@ import styles from './UserSettings.module.css';
 import ChangeNamePassw from '../ChangeNamePassw/ChangeNamePassw';
 import FriendList from '../FriendList/FriendList';
 import { DarkLightContext } from '../ContextDarkLightMode/ContextDarkLightMode';
+import FindNameByEmail from '../FindNameByEmail/FindNameByEmail';
 
 const { Text } = Typography;
 
@@ -170,15 +171,20 @@ const UserSettings = ({ users = [], getUsers, email }) => {
         <Row>
           <Col>
             <Row>
-              <Text>Email: {serchedEmail.email}</Text>
+              <Text className={mode ? styles.tabsdark : styles.tabslight}>
+                Email: {serchedEmail.email}
+              </Text>
             </Row>
             <Row>
-              <Text>Nazwa użytkownika: {serchedEmail.user}</Text>
+              <Text className={mode ? styles.tabsdark : styles.tabslight}>
+                Nazwa użytkownika: {serchedEmail.user}
+              </Text>
             </Row>
           </Col>
-          <Col>
+          <Col className={styles.col}>
             <Button
               className={mode ? styles.buttonlight : styles.buttondark}
+              shape="round"
               onClick={() => sendInvite(serchedEmail.email)}
             >
               Dodaj
@@ -189,51 +195,93 @@ const UserSettings = ({ users = [], getUsers, email }) => {
     );
   }
   const searchName = (value) => {
+    console.log(value);
     if (value) {
       const find = users.find((user) => user.email === value);
       let returning;
+      console.log(find);
       if (find !== undefined) {
         returning = find.user;
       } else {
         returning = '';
       }
+      console.log(returning);
       return returning;
     }
   };
   let friendsrequestlist = <></>;
   if (requestListArray !== null && requestListArray !== '' && requestListArray !== undefined) {
-    friendsrequestlist = (
-      <div className={mode ? styles.invitelight : styles.invitedark}>
-        <Card className={mode ? styles.invitelight : styles.invitedark}>
-          <Space direction="vertical">
-            <h5 style={{ color: textColor }}>Zaproszenia:</h5>
-            {requestListArray.map((item) => (
+    console.log(requestListArray.length);
+    if (requestListArray.length === 1) {
+      console.log(requestListArray[0]);
+      friendsrequestlist = (
+        <div className={mode ? styles.invitelight : styles.invitedark}>
+          <Card className={mode ? styles.invitelight : styles.invitedark}>
+            <Space direction="vertical">
+              <h5 style={{ color: textColor }}>Zaproszenia:</h5>
               <Row>
                 <Col>
-                  <Text>{searchName(item)}</Text>
+                  <Text className={mode ? styles.tabsdark : styles.tabslight}>
+                    <FindNameByEmail users={users} email={requestListArray[0]} />
+                  </Text>
                 </Col>
                 <Col style={{ position: 'absolute', right: '0px' }}>
                   <Button
                     className={mode ? styles.buttonlight : styles.buttondark}
                     type="text"
-                    onClick={() => addFriend(item)}
+                    onClick={() => addFriend(requestListArray[0])}
                   >
                     <CheckOutlined style={{ color: '#00ff00' }} />
                   </Button>
                   <Button
                     className={mode ? styles.buttonlight : styles.buttondark}
                     type="text"
-                    onClick={() => deleteRequest(item)}
+                    onClick={() => deleteRequest(requestListArray[0])}
                   >
                     <CloseOutlined style={{ color: '#ff0000' }} />
                   </Button>
                 </Col>
               </Row>
-            ))}
-          </Space>
-        </Card>
-      </div>
-    );
+            </Space>
+          </Card>
+        </div>
+      );
+    } else {
+      friendsrequestlist = (
+        <div className={mode ? styles.invitelight : styles.invitedark}>
+          <Card className={mode ? styles.invitelight : styles.invitedark}>
+            <Space direction="vertical">
+              <h5 style={{ color: textColor }}>Zaproszenia:</h5>
+              {requestListArray.map((item) => (
+                <Row>
+                  <Col>
+                    <Text>
+                      <FindNameByEmail users={users} email={item} />
+                    </Text>
+                  </Col>
+                  <Col style={{ position: 'absolute', right: '0px' }}>
+                    <Button
+                      className={mode ? styles.buttonlight : styles.buttondark}
+                      type="text"
+                      onClick={() => addFriend(item)}
+                    >
+                      <CheckOutlined style={{ color: '#00ff00' }} />
+                    </Button>
+                    <Button
+                      className={mode ? styles.buttonlight : styles.buttondark}
+                      type="text"
+                      onClick={() => deleteRequest(item)}
+                    >
+                      <CloseOutlined style={{ color: '#ff0000' }} />
+                    </Button>
+                  </Col>
+                </Row>
+              ))}
+            </Space>
+          </Card>
+        </div>
+      );
+    }
   }
   return (
     <div className={mode ? styles.divlight : styles.divdark}>

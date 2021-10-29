@@ -22,8 +22,8 @@
     position: absolute;
     text-align: center;
     left: -10%;
-    width: 40%;
-    height: 50%;
+    width: 45%;
+    height: auto;
     background-color: rgb(248, 239, 228);
     color: black !important;
 }
@@ -32,8 +32,8 @@
     position: absolute;
     text-align: center;
     left: -10%;
-    width: 40%;
-    height: 50%;
+    width: 15vw;
+    height: auto;
     background-color: rgb(26, 26, 26);
     color: white !important;
 }
@@ -76,6 +76,18 @@
     border-color: black;
 }
 
+.buttonlight:active{
+    background-color: rgb(68, 68, 68);
+    color: white !important;
+    border-color: whitesmoke;
+}
+
+.buttondark:active {
+    background-color: rgb(177, 177, 177);
+    color: black !important;
+    border-color: black;
+}
+
 .inputlight{
     background-color: rgb(26, 26, 26);
     color: white !important;
@@ -96,6 +108,14 @@
     background-color: rgb(248, 239, 228);
 }
 
+.inputlight:active {
+    background-color: rgb(26, 26, 26);
+}
+
+.inputdark:active {
+    background-color: rgb(248, 239, 228);
+}
+
 .tabslight {
     color: black;
 }
@@ -112,4 +132,9 @@
 .modaldark {
     background-color: rgb(248, 239, 228);
     color: black !important;
+}
+
+.col {
+    padding-top: 1%;
+    padding-left: 2%;
 }

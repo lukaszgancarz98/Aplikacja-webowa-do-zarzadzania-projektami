@@ -154,7 +154,7 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
                   onClick={() => changeFlagOne(modalOne)}
                   style={{ fontSize: 'large' }}
                 >
-                  <MinusSquareOutlined />
+                  <MinusSquareOutlined style={{ color: textColor }} />
                 </Button>
               </Col>
               <Col style={buttonCloseStyles[0]}>
@@ -205,23 +205,38 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
     } else if (openChatArray[0]) {
       openchatsOne = (
         <>
-          <Button className={styles.firstClosedChat} onClick={() => changeFlagOne(modalOne)}>
+          <Button
+            className={mode ? styles.firstClosedChatdark : styles.firstClosedChatlight}
+            onClick={() => changeFlagOne(modalOne)}
+          >
             <Row>
               <Col>
-                <h6 style={{ position: 'fixed', bottom: '1%' }}>
+                <h6 style={{ position: 'fixed', bottom: '1%', color: textColor }}>
                   <FindNameByEmail users={users} email={openChatArray[0]} />
                 </h6>
               </Col>
               <Col>
                 <PlusSquareOutlined
-                  style={{ position: 'fixed', right: '17.5%', bottom: '1.75%', fontSize: 'large' }}
+                  style={{
+                    position: 'fixed',
+                    right: '17.5%',
+                    bottom: '1.75%',
+                    fontSize: 'large',
+                    color: textColor,
+                  }}
                 />
               </Col>
             </Row>
           </Button>
           <Button size="small" type="text" onClick={() => deleteWindowChat(openChatArray[0])}>
             <CloseSquareOutlined
-              style={{ position: 'fixed', right: '19%', bottom: '1.75%', fontSize: 'large' }}
+              style={{
+                position: 'fixed',
+                right: '19%',
+                bottom: '1.75%',
+                fontSize: 'large',
+                color: textColor,
+              }}
             />
           </Button>
         </>
@@ -231,9 +246,9 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
       if (openChatArray[1]) {
         openchatsTwo = (
           <div style={mainStyles[1]}>
-            <Row className={styles.userstyles}>
+            <Row className={mode ? styles.userstylesdark : styles.userstyleslight}>
               <Col span={8}>
-                <h5 style={{ paddingLeft: '10%', width: '150%' }}>
+                <h5 style={{ paddingLeft: '10%', width: '150%', color: textColor }}>
                   <FindNameByEmail users={users} email={openChatArray[1]} />
                 </h5>
               </Col>
@@ -244,7 +259,7 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
                   onClick={() => changeFlagTwo(modalTwo)}
                   style={{ fontSize: 'large' }}
                 >
-                  <MinusSquareOutlined />
+                  <MinusSquareOutlined style={{ color: textColor }} />
                 </Button>
               </Col>
               <Col style={buttonCloseStyles[1]}>
@@ -254,41 +269,40 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
                   onClick={() => deleteWindowChat(openChatArray[1])}
                   style={{ fontSize: 'large' }}
                 >
-                  <CloseSquareOutlined />
+                  <CloseSquareOutlined style={{ color: textColor }} />
                 </Button>
               </Col>
             </Row>
             <ChatText
+              mode={mode}
               messages={messages}
               users={users}
-              userName={users.find((user) => user.email === openChatArray[1])}
               email={email}
+              userName={users.find((user) => user.email === openChatArray[1])}
               getMessages={getMessages}
             />
-            <Row>
-              <div>
-                <Form
-                  initialValues={{
-                    messageToSaveTwo,
-                  }}
-                  form={form}
-                  onFinish={addMessage}
-                >
-                  <Form.Item name="messageToSaveTwo">
-                    <Input className={mode ? styles.inputlight : styles.inputdark} />
-                  </Form.Item>
-                  <Form.Item>
-                    <Button
-                      type="text"
-                      htmlType="submit"
-                      style={secondaryStyles[1]}
-                      onClick={() => onClick(openChatArray[1])}
-                    >
-                      <PlusCircleOutlined />
-                    </Button>
-                  </Form.Item>
-                </Form>
-              </div>
+            <Row style={{ height: '16%', backgroundColor }}>
+              <Form
+                initialValues={{
+                  messageToSaveTwo,
+                }}
+                form={form}
+                onFinish={addMessage}
+              >
+                <Form.Item name="messageToSaveTwo">
+                  <Input className={mode ? styles.inputlight : styles.inputdark} />
+                </Form.Item>
+                <Form.Item>
+                  <Button
+                    type="text"
+                    htmlType="submit"
+                    style={secondaryStyles[1]}
+                    onClick={() => onClick(openChatArray[1])}
+                  >
+                    <PlusCircleOutlined style={{ fontSize: 'x-large' }} />
+                  </Button>
+                </Form.Item>
+              </Form>
             </Row>
           </div>
         );
@@ -296,23 +310,38 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
     } else if (openChatArray[1]) {
       openchatsTwo = (
         <>
-          <Button className={styles.secoundClosedChat} onClick={() => changeFlagTwo(modalTwo)}>
+          <Button
+            className={mode ? styles.secoundClosedChatdark : styles.secoundClosedChatlight}
+            onClick={() => changeFlagTwo(modalTwo)}
+          >
             <Row>
               <Col>
-                <h6 style={{ position: 'fixed', bottom: '1%' }}>
+                <h6 style={{ position: 'fixed', bottom: '1%', color: textColor }}>
                   <FindNameByEmail users={users} email={openChatArray[1]} />
                 </h6>
               </Col>
               <Col>
                 <PlusSquareOutlined
-                  style={{ position: 'fixed', right: '33.5%', bottom: '1.75%', fontSize: 'large' }}
+                  style={{
+                    position: 'fixed',
+                    right: '33.5%',
+                    bottom: '1.75%',
+                    fontSize: 'large',
+                    color: textColor,
+                  }}
                 />
               </Col>
             </Row>
           </Button>
           <Button size="small" type="text" onClick={() => deleteWindowChat(openChatArray[1])}>
             <CloseSquareOutlined
-              style={{ position: 'fixed', right: '35%', bottom: '1.75%', fontSize: 'large' }}
+              style={{
+                position: 'fixed',
+                right: '35%',
+                bottom: '1.75%',
+                fontSize: 'large',
+                color: textColor,
+              }}
             />
           </Button>
         </>
