@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
 const FindNameByEmail = ({ users = [], email }) => {
+  console.log(users, email);
   const nameFound = users.find((user) => user.email === email);
   return nameFound.user;
 };

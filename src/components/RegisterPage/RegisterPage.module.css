@@ -10,6 +10,12 @@
     left: 50%;
 }
 
+.buttonreg{
+    background-color: green;
+    border-color: lightgreen;
+    left: 140%;
+}
+
 .input{
     background-color: white;
     color: black;

@@ -104,41 +104,37 @@ const RegisterPage = () => {
         </Row>
       </Header>
       <div className={styles.div}>
-        <Col offset={10}>
-          <Row>
-            <Col span={10} style={{ width: '100%', paddingTop: '20%' }}>
-              <h1 style={{ paddingLeft: '8%' }}>Rejestracja</h1>
-              <Form
-                labelCol={{ span: 5 }}
-                wrapperCol={{ span: 8 }}
-                initialValues={{
-                  newNameReg,
-                  newEmailReg,
-                  newPassword,
-                }}
-                onFinish={Register}
-              >
-                <Form.Item label="Nazwa użytkownika:" name="newNameReg">
-                  <Input {...configName} className={styles.input} />
-                </Form.Item>
-                <Form.Item label="Email:" name="newEmailReg">
-                  <Input type="email" {...configEmail} className={styles.input} />
-                </Form.Item>
-                <Form.Item label="Hasło:" name="newPassword">
-                  <Input.Password
-                    className={styles.passinput}
-                    {...configPassword}
-                    iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                  />
-                </Form.Item>
-                <Form.Item>
-                  <Button type="round" htmlType="submit" className={styles.button}>
-                    Zarejestruj się
-                  </Button>
-                </Form.Item>
-              </Form>
-            </Col>
-          </Row>
+        <Col style={{ width: '50vw', paddingTop: '20%', paddingLeft: '30%' }}>
+          <h1 style={{ paddingLeft: '40%' }}>Rejestracja</h1>
+          <Form
+            labelCol={{ span: 10 }}
+            wrapperCol={{ span: 8 }}
+            initialValues={{
+              newNameReg,
+              newEmailReg,
+              newPassword,
+            }}
+            onFinish={Register}
+          >
+            <Form.Item label="Nazwa użytkownika:" name="newNameReg">
+              <Input {...configName} className={styles.input} />
+            </Form.Item>
+            <Form.Item label="Email:" name="newEmailReg">
+              <Input type="email" {...configEmail} className={styles.input} />
+            </Form.Item>
+            <Form.Item label="Hasło:" name="newPassword">
+              <Input.Password
+                className={styles.passinput}
+                {...configPassword}
+                iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+              />
+            </Form.Item>
+            <Form.Item>
+              <Button type="round" htmlType="submit" className={styles.buttonreg}>
+                Zarejestruj się
+              </Button>
+            </Form.Item>
+          </Form>
         </Col>
       </div>
     </>

@@ -40,7 +40,7 @@ const NewProjectModal = ({ email, toggle, getProjects }) => {
       <Form
         onFinish={createNewProject}
         labelCol={{
-          span: 5,
+          span: 7,
         }}
         wrapperCol={{
           span: 14,

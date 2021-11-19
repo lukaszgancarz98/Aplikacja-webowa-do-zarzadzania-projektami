@@ -31,6 +31,7 @@ const UserSettings = ({ users = [], getUsers, email }) => {
   if (currentData[0].friendsrequest) {
     requestListArray = currentData[0].friendsrequest.split(',');
     requestListArray = requestListArray.filter((item) => item !== '');
+    requestListArray = requestListArray.filter((item) => item !== 'null');
   }
   const sendInvite = (newFriend) => {
     const recipient = users.find((user) => newFriend === user.email);
