@@ -1,0 +1,11 @@
+.div {
+    position: absolute;
+    width: 30%;
+    left: 35%;
+    top: 30%;
+}
+
+.title {
+    position: relative;
+    text-align: center;
+}

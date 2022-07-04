@@ -1,0 +1,26 @@
+.button{
+    height: 30px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 90px;
+}
+
+.header{
+    font-size: 36px
+}
+
+.buttonCol{
+    height: 50px;
+}
+
+.registerButton{
+    position: relative;
+    left: 30px;
+    top: -10px;
+    color: white;
+    display: inline-block;
+    justify-content: center;
+    align-items: center; 
+}
