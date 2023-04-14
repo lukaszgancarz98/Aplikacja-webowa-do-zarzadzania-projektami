@@ -1,0 +1,184 @@
+.friendlistdark{
+    left: 30%;
+    text-align: center;
+    min-width: 45%;
+    height: auto;
+    background-color: rgb(248, 239, 228);
+    border-color: black;
+    color: black !important;
+}
+
+.friendlistlight{
+    left: 30%;
+    text-align: center;
+    min-width: 45%;
+    height: auto;
+    background-color: rgb(15, 15, 15);
+    border-color: white;
+    color: white !important;
+}
+
+.invitedark{
+    position: absolute;
+    text-align: center;
+    left: -10%;
+    width: auto;
+    height: auto;
+    background-color: rgb(248, 239, 228);
+    border-color: black;
+    color: black !important;
+}
+
+.invitelight{
+    position: absolute;
+    text-align: center;
+    left: -10%;
+    width: auto;
+    height: auto;
+    background-color: rgb(15, 15, 15);
+    border-color: white;
+    color: white !important;
+}
+
+.divlight {
+    background-color: rgb(15, 15, 15);
+    width: 100vw;
+    height: 70vh;
+    color: white !important;
+}
+
+.divdark {
+    background-color: rgb(248, 239, 228);
+    width: 100vw;
+    height: 70vh;
+    color: black !important;
+}
+
+.buttonlight{
+    background-color: rgb(26, 26, 26);
+    color: white !important;
+    border-color: whitesmoke;
+}
+
+.buttondark {
+    background-color: rgb(248, 239, 228);
+    color: black !important;
+    border-color: black;
+}
+
+.buttonlight:hover{
+    background-color: rgb(15, 15, 15);
+    color: white !important;
+    border-color: whitesmoke;
+}
+
+.buttondark:hover {
+    background-color: rgb(177, 177, 177);
+    color: black !important;
+    border-color: black;
+}
+
+.buttonlight:active{
+    background-color: rgb(15, 15, 15);
+    color: white !important;
+    border-color: whitesmoke;
+}
+
+.buttondark:active {
+    background-color: rgb(177, 177, 177);
+    color: black !important;
+    border-color: black;
+}
+
+.buttonlightdz{
+    background-color: rgb(26, 26, 26);
+    color: white !important;
+    border-color: whitesmoke;
+    left: 2.25vw;
+}
+
+.buttondarkdz {
+    background-color: rgb(248, 239, 228);
+    color: black !important;
+    border-color: black;
+    left: 2.25vw;
+}
+
+.buttonlightdz:hover{
+    background-color: rgb(15, 15, 15);
+    color: white !important;
+    border-color: whitesmoke;
+    left: 2.25vw;
+}
+
+.buttondarkdz:hover {
+    background-color: rgb(177, 177, 177);
+    color: black !important;
+    border-color: black;
+    left: 2.25vw;
+}
+
+.buttonlightdz:active{
+    background-color: rgb(15, 15, 15);
+    color: white !important;
+    border-color: whitesmoke;
+    left: 2.25vw;
+}
+
+.buttondarkdz:active {
+    background-color: rgb(177, 177, 177);
+    color: black !important;
+    border-color: black;
+    left: 2.25vw;
+}
+
+.inputlight{
+    background-color: rgb(15, 15, 15);
+    color: white !important;
+    border-color: whitesmoke;
+}
+
+.inputdark {
+    background-color: rgb(248, 239, 228);
+    color: black !important;
+    border-color: black;
+}
+
+.inputlight:hover {
+    background-color: rgb(15, 15, 15);
+}
+
+.inputdark:hover {
+    background-color: rgb(248, 239, 228);
+}
+
+.inputlight:active {
+    background-color: rgb(15, 15, 15);
+}
+
+.inputdark:active {
+    background-color: rgb(248, 239, 228);
+}
+
+.tabslight {
+    color: black;
+}
+
+.tabsdark {
+    color: white;
+}
+
+.modallight {
+    background-color: rgb(15, 15, 15);
+    color: white !important;
+}
+
+.modaldark {
+    background-color: rgb(248, 239, 228);
+    color: black !important;
+}
+
+.col {
+    padding-top: 1%;
+    padding-left: 2%;
+}

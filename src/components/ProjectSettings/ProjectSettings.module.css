@@ -1,0 +1,62 @@
+.formtextdark {
+    color: white;
+    align-items: center;
+}
+
+.formtextlight {
+    color: black;
+}
+
+.inputlight {
+    background-color: white;
+    color: black !important;
+    border-color: whitesmoke;
+}
+
+.inputdark {
+    background-color: rgb(63, 63, 63);
+    color: black !important;
+    border-color: black;
+}
+
+.inputlight:hover {
+    background-color: white;
+    color: black !important;
+    border-color: whitesmoke;
+}
+
+.inputdark:hover {
+    background-color: rgb(63, 63, 63);
+    color: black !important;
+    border-color: black;
+}
+
+.divdark {
+    background-color: rgb(26, 26, 26);
+    color: white !important;
+}
+
+.divlight {
+    background-color: rgb(248, 239, 228);
+    color: black !important;
+}
+
+.colformdark {
+    width: 25vw;
+    border-color: white;
+}
+
+.colformlight {
+    width: 25vw;
+    border-color: black;
+}
+
+.displayusersdark {
+    background-color: rgb(26, 26, 26);
+    color: white !important;
+}
+
+.displayuserslight {
+    background-color: rgb(248, 239, 228);
+    color: black !important;
+}

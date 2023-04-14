@@ -1,0 +1,30 @@
+.div{
+    background-image: url("backphoto.jpg");
+    min-height: 92vh;
+    position: absolute;
+    left: -1%;
+    min-width: 101vw;
+}
+
+.loginwindow{
+    padding-top: 15%;
+    right: 10%;
+}
+
+.loginbutton{
+    left: 100%;
+    background-color: lime;
+}
+
+.loginbutton:hover {
+    left: 100%;
+    background-color: rgb(29, 129, 29);
+}
+
+.button {
+    background-color: green;
+}
+
+.button:hover {
+    background-color: lime;
+}
