@@ -23,12 +23,13 @@ app.post('/signin', (req, res) => {
     database.select('email', 'password', 'user').from('users')
     .where('email', '=', req.body.email)
     .then(data => {
-    if (req.body.password === data[0].password) {
-        res.json(data[0]);
+    if (data[0].email === req.body.email) {
+        if (req.body.password === data[0].password) {
+            res.json(data);
+        }
     } else {
-        res.json('fail');
-    }
-    })
+        res.json('fail')
+    }})
     .catch(err => res.status(400).json(err))
 })
 
@@ -49,6 +50,7 @@ app.post('/checkuser', (req, res) => {
 app.post('/messageseen', (req, res) => {
     database('conversation')
     .where('receiver', '=', req.body.email)
+    .where('sender', '=', req.body.person)
     .update({
         seen: 'yes',
     })
@@ -115,7 +117,9 @@ app.post('/register', (req, res) => {
             email: email,
             user: name,
             password: password,
-            joined: new Date()
+            joined: new Date(),
+            friends: '',
+            friendsrequest: ''
     })
     .then(user => {
         res.json(user[0]);
@@ -168,6 +172,16 @@ app.put('/changeuser', (req, res) => {
     } else {
         res.status(400)
     }
+})
+
+app.put('/changeproject', (req, res) => {
+    database('newprojects')
+    .where('name', '=', req.body.projectName)
+    .update({
+        description: req.body.projectDescription
+    })
+    .then((data) => res.json(data))
+    .catch(err => res.status(400).json(err))
 })
 
 app.post('/createtask', (req, res) => {

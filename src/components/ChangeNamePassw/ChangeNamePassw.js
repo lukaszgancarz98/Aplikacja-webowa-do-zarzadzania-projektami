@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Form, Input, Button, Space, Typography } from 'antd';
 import PropTypes from 'prop-types';
 import { VariableContext } from '../VariableContext/VariableContext';
-import styles from '../UserSettings/UserSettings.module.css';
+import styles from './ChangeNamePassw.module.css';
 
 const { Text } = Typography;
 
@@ -27,7 +27,9 @@ const ChangeNamePassw = ({ pass, email, getUsers, mode }) => {
         .then((response) => response.json())
         .then((data) => {
           if (data === 'fail') {
-            console.log('err');
+            console.log('pop');
+          } else {
+            console.log('pop');
           }
         });
     } else {
@@ -35,30 +37,36 @@ const ChangeNamePassw = ({ pass, email, getUsers, mode }) => {
     }
   };
   const changeName = (value) => {
-    newName(value.newNameUser);
     const AddNewName = value.newNameUser;
-    fetch('http://localhost:3000/changeuser', {
-      method: 'put',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email,
-        name: AddNewName,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data === 'fail') {
-          console.log('err');
-        }
-      });
-    getUsers();
+    if (AddNewName !== '') {
+      fetch('http://localhost:3000/changeuser', {
+        method: 'put',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          name: AddNewName,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data === 'fail') {
+            console.log('err');
+          } else {
+            console.log('pop');
+            newName(value.newNameUser);
+          }
+        });
+      getUsers();
+    } else {
+      console.log('pop');
+    }
   };
   return (
     <>
       <Form
         onFinish={changePassword}
         labelCol={{
-          span: 7,
+          span: 10,
         }}
         wrapperCol={{
           span: 14,
@@ -70,18 +78,18 @@ const ChangeNamePassw = ({ pass, email, getUsers, mode }) => {
         }}
       >
         <Form.Item label={<span style={{ color: textColor }}>Stare hasło</span>} name="password">
-          <Input className={mode ? styles.buttonlight : styles.buttondark} />
+          <Input className={!mode ? styles.inputdark : styles.inputlight} />
         </Form.Item>
         <Form.Item
           label={<span style={{ color: textColor }}>Powtórz hasło</span>}
           name="repPassword"
         >
-          <Input className={mode ? styles.buttonlight : styles.buttondark} />
+          <Input className={!mode ? styles.inputdark : styles.inputlight} />
         </Form.Item>
         <Form.Item label={<span style={{ color: textColor }}>Nowe hasło</span>} name="newPassword">
-          <Input className={mode ? styles.buttonlight : styles.buttondark} />
+          <Input className={!mode ? styles.inputdark : styles.inputlight} />
         </Form.Item>
-        <Form.Item>
+        <Form.Item style={{ align: 'right' }}>
           <Button className={mode ? styles.buttonlight : styles.buttondark} htmlType="submit">
             OK
           </Button>
@@ -91,7 +99,7 @@ const ChangeNamePassw = ({ pass, email, getUsers, mode }) => {
         onFinish={changeName}
         className={mode ? styles.modallight : styles.modaldark}
         labelCol={{
-          span: 7,
+          span: 10,
         }}
         wrapperCol={{
           span: 14,

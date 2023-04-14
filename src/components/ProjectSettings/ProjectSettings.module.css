@@ -1,5 +1,6 @@
 .formtextdark {
     color: white;
+    align-items: center;
 }
 
 .formtextlight {
@@ -7,8 +8,8 @@
 }
 
 .inputlight {
-    background-color: rgb(26, 26, 26);
-    color: white !important;
+    background-color: white;
+    color: black !important;
     border-color: whitesmoke;
 }
 
@@ -19,8 +20,8 @@
 }
 
 .inputlight:hover {
-    background-color: rgb(26, 26, 26);
-    color: white !important;
+    background-color: white;
+    color: black !important;
     border-color: whitesmoke;
 }
 

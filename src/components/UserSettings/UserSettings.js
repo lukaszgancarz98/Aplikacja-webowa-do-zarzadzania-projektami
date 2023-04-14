@@ -8,6 +8,7 @@ import ChangeNamePassw from '../ChangeNamePassw/ChangeNamePassw';
 import FriendList from '../FriendList/FriendList';
 import { DarkLightContext } from '../ContextDarkLightMode/ContextDarkLightMode';
 import FindNameByEmail from '../FindNameByEmail/FindNameByEmail';
+import Chat from '../Chat/Chat';
 
 const { Text } = Typography;
 
@@ -212,11 +213,9 @@ const UserSettings = ({ users = [], getUsers, email }) => {
   };
   let friendsrequestlist = <></>;
   if (requestListArray !== null && requestListArray !== '' && requestListArray !== undefined) {
-    console.log(requestListArray.length);
     if (requestListArray.length === 1) {
-      console.log(requestListArray[0]);
       friendsrequestlist = (
-        <div className={mode ? styles.invitelight : styles.invitedark}>
+        <>
           <Card className={mode ? styles.invitelight : styles.invitedark}>
             <Space direction="vertical">
               <h5 style={{ color: textColor }}>Zaproszenia:</h5>
@@ -227,29 +226,31 @@ const UserSettings = ({ users = [], getUsers, email }) => {
                   </Text>
                 </Col>
                 <Col style={{ position: 'absolute', right: '0px' }}>
-                  <Button
-                    className={mode ? styles.buttonlight : styles.buttondark}
-                    type="text"
-                    onClick={() => addFriend(requestListArray[0])}
-                  >
-                    <CheckOutlined style={{ color: '#00ff00' }} />
-                  </Button>
-                  <Button
-                    className={mode ? styles.buttonlight : styles.buttondark}
-                    type="text"
-                    onClick={() => deleteRequest(requestListArray[0])}
-                  >
-                    <CloseOutlined style={{ color: '#ff0000' }} />
-                  </Button>
+                  <Space direction="horizontal">
+                    <Button
+                      className={mode ? styles.buttonlight : styles.buttondark}
+                      type="text"
+                      onClick={() => addFriend(requestListArray[0])}
+                    >
+                      <CheckOutlined style={{ color: '#00ff00' }} />
+                    </Button>
+                    <Button
+                      className={mode ? styles.buttonlight : styles.buttondark}
+                      type="text"
+                      onClick={() => deleteRequest(requestListArray[0])}
+                    >
+                      <CloseOutlined style={{ color: '#ff0000' }} />
+                    </Button>
+                  </Space>
                 </Col>
               </Row>
             </Space>
           </Card>
-        </div>
+        </>
       );
     } else {
       friendsrequestlist = (
-        <div className={mode ? styles.invitelight : styles.invitedark}>
+        <>
           <Card className={mode ? styles.invitelight : styles.invitedark}>
             <Space direction="vertical">
               <h5 style={{ color: textColor }}>Zaproszenia:</h5>
@@ -260,7 +261,7 @@ const UserSettings = ({ users = [], getUsers, email }) => {
                       <FindNameByEmail users={users} email={item} />
                     </Text>
                   </Col>
-                  <Col style={{ position: 'absolute', right: '0px' }}>
+                  <Col>
                     <Button
                       className={mode ? styles.buttonlight : styles.buttondark}
                       type="text"
@@ -280,30 +281,30 @@ const UserSettings = ({ users = [], getUsers, email }) => {
               ))}
             </Space>
           </Card>
-        </div>
+        </>
       );
     }
   }
   return (
     <div className={mode ? styles.divlight : styles.divdark}>
       <Row>
-        <Col span={8}>
+        <Col offset={1} span={8}>
           <ChangeNamePassw mode={mode} email={email} getUsers={getUsers} pass={userPassword} />
         </Col>
-        <Col span={7}>
-          <FriendList mode={mode} email={email} users={users} getUsers={getUsers} />
-        </Col>
-        <Col span={8}>
-          <Row>
+        <Col span={3}>
+          <Space direction="vertical">
+            <FriendList mode={mode} email={email} users={users} getUsers={getUsers} />
             <Button
-              className={mode ? styles.buttonlight : styles.buttondark}
+              className={mode ? styles.buttonlightdz : styles.buttondarkdz}
               type="round"
               onClick={() => toggle()}
             >
               Dodaj znajomego
             </Button>
-          </Row>
-          <Row>{friendsrequestlist}</Row>
+          </Space>
+        </Col>
+        <Col span={3} offset={1}>
+          {friendsrequestlist}
         </Col>
         <Col>
           <h5 style={{ color: textColor }}>Tryb ciemny</h5>
@@ -348,6 +349,7 @@ const UserSettings = ({ users = [], getUsers, email }) => {
           </Modal>
         </Col>
       </Row>
+      <Chat />
     </div>
   );
 };

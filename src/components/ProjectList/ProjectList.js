@@ -35,19 +35,19 @@ const ProjectList = ({ projects = [], getProjects }) => {
               <List.Item>
                 <Card className={mode ? styles.cardlight : styles.carddark}>
                   <Row>
-                    <Col>
+                    <Col span={20}>
                       <MoveToProject mode={mode} project={item} name={item.name} />
+                      <p style={{ color: textColor }}>{item.description}</p>
+                    </Col>
+                    <Col style={{ align: 'right' }}>
+                      <DeleteProject mode={mode} item={item} getProjects={getProjects} />
                     </Col>
                   </Row>
                   <Row>
-                    <Col>
-                      <p style={{ color: textColor }}>{item.description}</p>
-                      <DeleteProject mode={mode} item={item} getProjects={getProjects} />
-                    </Col>
-                    <Col>
+                    <Col offset={1}>
                       <UsersInProjectList mode={mode} project={item} />
                     </Col>
-                    <Col>
+                    <Col offset={1}>
                       <LastTimeUpdateDisplay mode={mode} update={item.update} />
                     </Col>
                   </Row>

@@ -1,5 +1,3 @@
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import firebase from 'firebase';
 
 const firebaseConfig = {
@@ -11,8 +9,6 @@ const firebaseConfig = {
   appId: '1:1010886694160:web:6e7787dc3bdce4ab854195',
   measurementId: 'G-WDYXTWZ8DQ',
 };
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-// firebase.analytics();
 
 export default firebase;

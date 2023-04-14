@@ -60,7 +60,7 @@ const UsersInProjectList = ({ project = [], mode }) => {
           <Row>
             <h6 style={{ color: textColor }}>Użytkownicy:</h6>
           </Row>
-          <Row>
+          <Row style={{ paddingLeft: 10 }}>
             <Space direction="vertical">
               {friendListArray.map((item) => (
                 <>

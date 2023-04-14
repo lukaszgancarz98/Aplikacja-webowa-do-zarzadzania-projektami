@@ -55,19 +55,19 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
     },
     buttonCloseModalOne: {
       position: 'fixed',
-      bottom: '27.5%',
+      bottom: '28.25%',
       right: '17%',
       fontSize: 'large',
     },
     buttonCloseModalTwo: {
       position: 'fixed',
-      bottom: '27.5%',
+      bottom: '28.25%',
       right: '33%',
       fontSize: 'large',
     },
     buttonModalOne: {
       position: 'fixed',
-      bottom: '27.5%',
+      bottom: '28.25%',
       right: '18.5%',
       fontSize: 'large',
     },
@@ -75,7 +75,7 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
       height: 'auto',
       width: 'auto',
       position: 'fixed',
-      bottom: '27.5%',
+      bottom: '28.25%',
       right: '34.5%',
       fontSize: 'large',
     },
@@ -115,13 +115,13 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
       getMessages();
     }
   };
-  const messageSeen = () => {
-    console.log('seen');
+  const messageSeen = (person) => {
     fetch('http://localhost:3000/messageseen', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email,
+        person,
       }),
     }).then((data) => console.log(data));
   };
@@ -133,10 +133,14 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
       if (openChatArray[0]) {
         if (messages) {
           if (
-            messages.filter((message) => message.receiver === email && message.seen === 'no')
-              .length !== 0
+            messages.filter(
+              (message) =>
+                message.receiver === email &&
+                message.seen === 'no' &&
+                message.sender === openChatArray[0]
+            ).length !== 0
           ) {
-            messageSeen();
+            messageSeen(openChatArray[0]);
           }
         }
         openchatsOne = (
@@ -176,7 +180,7 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
               userName={users.find((user) => user.email === openChatArray[0])}
               getMessages={getMessages}
             />
-            <Row style={{ height: '16%', backgroundColor }}>
+            <Row style={{ height: '15%', backgroundColor }}>
               <Form
                 initialValues={{
                   messageToSaveOne,
@@ -281,7 +285,7 @@ const ChatOpenWindow = ({ users = [], email, deleteWindowChat, messages, getMess
               userName={users.find((user) => user.email === openChatArray[1])}
               getMessages={getMessages}
             />
-            <Row style={{ height: '16%', backgroundColor }}>
+            <Row style={{ height: '15%', backgroundColor }}>
               <Form
                 initialValues={{
                   messageToSaveTwo,

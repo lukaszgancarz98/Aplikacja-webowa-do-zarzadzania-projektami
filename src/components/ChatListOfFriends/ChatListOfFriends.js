@@ -43,6 +43,17 @@ const ChatListOfFriends = ({ users = [], friends, email }) => {
     friendsLength = friends.length;
     friendsList = friends;
   }
+  const isMessageSeen = (person) => {
+    if (messages && person) {
+      const unseenMessages = messages.filter(
+        (message) =>
+          message.receiver === email && message.seen === 'no' && message.sender === person
+      ).length;
+      if (unseenMessages > 0) {
+        return <>{`(${unseenMessages})`}</>;
+      }
+    }
+  };
   let title = <></>;
   if (messages) {
     if (
@@ -106,7 +117,7 @@ const ChatListOfFriends = ({ users = [], friends, email }) => {
               type="text"
               onClick={() => chatWindow(friend)}
             >
-              - <FindNameByEmail users={users} email={friend} />
+              - <FindNameByEmail users={users} email={friend} /> {isMessageSeen(friend)}
             </Button>
           ))}
         </Space>

@@ -32,11 +32,11 @@ const LogInPage = () => {
       .then((data) => {
         console.log(data);
         if (data !== 'false') {
+          newEmail(res.email);
+          newName(data.user);
           Auth.login(() => {
             history.push('/projectplanner');
           });
-          newEmail(res.email);
-          newName(data.user);
         } else {
           history.push('/registeracc');
           newEmail(res.email);
@@ -58,10 +58,17 @@ const LogInPage = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data !== 'fail') {
+        const isEmpty = (obj) => {
+          if (obj.length === 0 || obj.length === undefined) {
+            return true;
+          }
+          return false;
+        };
+        console.log(data);
+        if (data !== 'fail' && isEmpty(data) !== true) {
+          console.log(data[0].user);
           newEmail(values.email);
-          newName(data.user);
-          console.log(data.user);
+          newName(data[0].user);
           history.push('/projectplanner');
         } else {
           console.log('błędny login lub hasło');
@@ -80,8 +87,8 @@ const LogInPage = () => {
     <>
       <Header>
         <Row>
-          <Col>
-            <Button shape="round" onClick={handleonClick}>
+          <Col offset={23}>
+            <Button className={styles.button} shape="round" onClick={handleonClick}>
               Powrót
             </Button>
           </Col>
@@ -90,7 +97,7 @@ const LogInPage = () => {
       <div className={styles.div}>
         <Col offset={10} className={styles.loginwindow}>
           <Row>
-            <Col span={8} style={{ width: '150%' }}>
+            <Col span={6} style={{ width: '150%' }}>
               <h1 style={{ paddingLeft: '100px' }}>Logowanie</h1>
               <Form
                 onFinish={LogIn}
@@ -128,7 +135,7 @@ const LogInPage = () => {
                 </Form.Item>
               </Form>
             </Col>
-            <Col span={10} style={{ width: '150%', paddingTop: '1%' }}>
+            <Col offset={5} span={10} style={{ width: '150%', paddingTop: '1%' }}>
               <h3>Inne opcje logowania</h3>
               <Space
                 size={20}

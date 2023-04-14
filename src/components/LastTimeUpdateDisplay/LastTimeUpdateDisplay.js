@@ -10,7 +10,9 @@ const LastTimeUpdateDisplay = ({ update, mode }) => {
     updateDisplay = (
       <>
         <Col>
-          <Row>Ostatnia aktualizacja: </Row>
+          <Row>
+            <h6 style={{ color: textColor }}>Ostatnia aktualizacja: </h6>
+          </Row>
           <Row>{moment(new Date(update)).format('DD.MM HH:mm')}</Row>
         </Col>
       </>

@@ -1,13 +1,15 @@
 .div{
-    background-image: url("backphotoreg.jpg");
-    min-height: 100vh;
-    min-width: 100vh;
+    background-image: url("backgroundphoto.jpg");
+    min-height: 93vh;
+    position: absolute;
+    left: -1%;
+    min-width: 101vw;
 }
 
 .button{
+    left: 85vw;
     background-color: green;
     border-color: lightgreen;
-    left: 50%;
 }
 
 .buttonreg{

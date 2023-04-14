@@ -13,8 +13,8 @@ const RegisterPage = () => {
   const { newName } = useContext(VariableContext);
   const [newEmailReg] = useState('');
   const [users, setUsers] = useState();
-  const [newNameReg, setNewName] = useState('');
-  const [newPassword, setNewPassword] = useState('');
+  const [newNameReg] = useState('');
+  const [newPassword] = useState('');
   const configEmail = {
     rules: [
       {
@@ -44,13 +44,9 @@ const RegisterPage = () => {
   };
   const Register = (values) => {
     if (values.newEmailReg !== '') {
-      console.log(users);
       const findUser = users.find((user) => user.user === values.newNameReg);
       const findEmail = users.find((user) => user.email === values.newEmailReg);
       if (findUser === undefined && findEmail === undefined) {
-        setNewPassword(values.newPassword);
-        newName(values.newNameReg);
-        newEmail(values.newEmailReg);
         fetch('http://localhost:3000/register', {
           method: 'post',
           headers: { 'Content-Type': 'application/json' },
@@ -62,8 +58,9 @@ const RegisterPage = () => {
         })
           .then((response) => response.json())
           .then((user) => {
-            console.log(user);
             if (user !== 'fail') {
+              newEmail(values.newEmailReg);
+              newName(values.newNameReg);
               history.push('/projectplanner');
             } else {
               console.log('pop');
@@ -96,7 +93,7 @@ const RegisterPage = () => {
     <>
       <Header>
         <Row>
-          <Col>
+          <Col span={1}>
             <Button className={styles.button} shape="round" onClick={handleonClick}>
               Powrót
             </Button>
@@ -104,7 +101,7 @@ const RegisterPage = () => {
         </Row>
       </Header>
       <div className={styles.div}>
-        <Col style={{ width: '50vw', paddingTop: '20%', paddingLeft: '30%' }}>
+        <Col style={{ width: '60vw', paddingTop: '13%', paddingLeft: '35%' }}>
           <h1 style={{ paddingLeft: '40%' }}>Rejestracja</h1>
           <Form
             labelCol={{ span: 10 }}

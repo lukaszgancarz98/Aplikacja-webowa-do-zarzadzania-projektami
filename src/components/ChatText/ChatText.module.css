@@ -22,11 +22,11 @@
     margin-right: auto;
     border: 1px solid gray;
     border-radius: 20px;
-    background-color: rgb(67, 67, 192);
+    background-color: rgb(120, 120, 202);
   }
 
   .divChatRightlight {
-    background-color: rgb(67, 67, 192);
+    background-color: rgb(171, 171, 228);
     width: 70%;
     margin-left: auto;
     margin-right: 0;

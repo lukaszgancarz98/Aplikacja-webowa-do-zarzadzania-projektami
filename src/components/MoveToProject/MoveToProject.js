@@ -15,7 +15,7 @@ const MoveToProject = ({ project, name, mode }) => {
   return (
     <>
       <Button style={{ color: textColor, fontSize: 'x-large' }} type="text" onClick={openProject}>
-        {name}
+        <h4>{name}</h4>
       </Button>
     </>
   );

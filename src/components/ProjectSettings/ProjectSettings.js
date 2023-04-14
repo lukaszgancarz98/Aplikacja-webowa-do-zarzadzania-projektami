@@ -244,12 +244,26 @@ const ProjectSettings = ({ project, getProjects, getUsers, mode }) => {
   const { users } = useContext(VariableContext);
   const [projectName] = useState(project.name);
   const [projectDescription] = useState(project.description);
-  const editProject = () => {
-    console.log(project.users, 'edit');
+  const editProject = (values) => {
+    fetch('http://localhost:3000/changeproject', {
+      method: 'put',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        projectName: values.projectName,
+        projectDescription: values.projectDescription,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data === 'fail') {
+          console.log('pop');
+        } else {
+          console.log('pop');
+        }
+      });
   };
   const list = project.users;
   const splitList = list.split(' ').filter((item) => item !== '');
-  console.log(splitList);
   let restOfUsers = users;
   const ownerData = users.find((user) => user.email === email);
   let splitFriends;
@@ -282,13 +296,13 @@ const ProjectSettings = ({ project, getProjects, getUsers, mode }) => {
   }
   return (
     <>
-      <Row>
+      <Row justify="center">
         <Col className={mode ? styles.colformdark : styles.colformlight}>
           <h4 className={mode ? styles.formtextdark : styles.formtextlight}>Edytuj projekt</h4>
           <Form
             onFinish={editProject}
             labelCol={{
-              span: 5,
+              span: 8,
             }}
             wrapperCol={{
               span: 14,
@@ -325,18 +339,20 @@ const ProjectSettings = ({ project, getProjects, getUsers, mode }) => {
             </Form.Item>
           </Form>
         </Col>
-        <Users
-          mode={mode}
-          items={splitList}
-          users={users}
-          list={list}
-          restOfUsers={restOfUsers}
-          restOfFriends={restOfFriends}
-          projectName={projectName}
-          owner={project.owner}
-          getProjects={getProjects}
-          getUsers={getUsers}
-        />
+        <Col offset={1}>
+          <Users
+            mode={mode}
+            items={splitList}
+            users={users}
+            list={list}
+            restOfUsers={restOfUsers}
+            restOfFriends={restOfFriends}
+            projectName={projectName}
+            owner={project.owner}
+            getProjects={getProjects}
+            getUsers={getUsers}
+          />
+        </Col>
       </Row>
     </>
   );

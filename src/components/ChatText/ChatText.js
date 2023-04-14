@@ -57,7 +57,7 @@ const ChatText = ({ userName, users = [], email, messages, getMessages, mode }) 
         <>
           <div className={mode ? styles.divChatRightdark : styles.divChatRightlight}>
             <Popover
-              placement="right"
+              placement="left"
               content={<h6>{moment(new Date(message.time)).format('HH:mm')}</h6>}
             >
               <Row>

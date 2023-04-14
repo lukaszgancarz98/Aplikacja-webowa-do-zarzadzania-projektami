@@ -111,7 +111,7 @@ const MainPage = () => {
           </Row>
           <Row>
             <Col className={styles.projectlist}>
-              <Card style={{ backgroundColor: 'grey' }}>
+              <Card style={{ backgroundColor: 'rgb(208, 207, 218)' }}>
                 <ProjectList projects={getProjectsFotView(projects)} getProjects={getProjects} />
               </Card>
             </Col>

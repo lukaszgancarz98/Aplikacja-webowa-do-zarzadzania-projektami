@@ -15,11 +15,60 @@
     height: 50px;
 }
 
+.rowsize {
+    min-width: 60vw;
+}
+
+.imageprojlist {
+    background-image: url("projectlistpage.JPG");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 30vh;
+    width: 30vw;
+}
+
+.imageprojectpage {
+    background-image: url("projectpage.JPG");
+    margin-right: 0;
+    margin-left: auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 30vh;
+    width: 30vw;
+}
+
+.imageadduserlist {
+    align-items: end;
+    background-image: url("adduserlist.JPG");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 30vh;
+    width: 30vw;
+}
+
+.imageopenchats {
+    background-image: url("otwarteczaty.JPG");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 30vh;
+    width: 30vw;
+}
+
 .registerButton{
     position: relative;
     left: 30px;
     top: -10px;
     color: white;
+    display: inline-block;
+    justify-content: center;
+    align-items: center; 
+}
+
+.registerButton:hover{
+    position: relative;
+    left: 30px;
+    top: -10px;
+    color: rgb(172, 172, 172);
     display: inline-block;
     justify-content: center;
     align-items: center; 

@@ -14,6 +14,7 @@ import ProjectPageActions from '../ProjectPageActions/ProjectPageActions';
 import { EmailContext } from '../EmailContext/EmailContext';
 import styles from './ProjectPage.module.css';
 import { DarkLightContext } from '../ContextDarkLightMode/ContextDarkLightMode';
+import Chat from '../Chat/Chat';
 
 const { Title } = Typography;
 const { TabPane } = Tabs;
@@ -184,21 +185,25 @@ const ProjectPage = () => {
                       next={handleInfinitedOnLoadisNew(isNew(getTaskForView(tasks)))}
                       hasMore={hasMoreisNew}
                       useWindow="false"
-                      height={700}
+                      height={600}
                     >
                       {isNew(getTaskForView(tasks)).map((item) => (
                         <List.Item>
                           <Card className={mode ? styles.itemsdark : styles.itemslight}>
-                            <Row justify="end">
-                              <ProjectPageActions
-                                mode={textColor}
-                                item={item}
-                                getTasks={getTasks}
-                              />
+                            <Row>
+                              <Col span={18}>
+                                <Popover placement="left" content="xd" trigger="hover">
+                                  <h6>{item.taskname}</h6>
+                                </Popover>
+                              </Col>
+                              <Col>
+                                <ProjectPageActions
+                                  mode={textColor}
+                                  item={item}
+                                  getTasks={getTasks}
+                                />
+                              </Col>
                             </Row>
-                            <Popover placement="left" content="xd" trigger="hover">
-                              <h4 style={{ color: textColor }}>{item.taskname}</h4>
-                            </Popover>
                             <p style={{ color: textColor }}>
                               Utworzono:{' '}
                               {answer(
@@ -238,21 +243,25 @@ const ProjectPage = () => {
                       next={handleInfinitedOnLoadisInProgress(isInProgress(getTaskForView(tasks)))}
                       hasMore={hasMoreisDone}
                       useWindow="false"
-                      height={700}
+                      height={600}
                     >
                       {isInProgress(getTaskForView(tasks)).map((item) => (
                         <List.Item>
                           <Card className={mode ? styles.itemsdark : styles.itemslight}>
-                            <Row justify="end">
-                              <ProjectPageActions
-                                mode={textColor}
-                                item={item}
-                                getTasks={getTasks}
-                              />
+                            <Row>
+                              <Col span={18}>
+                                <Popover placement="left" content="xd" trigger="hover">
+                                  <h6>{item.taskname}</h6>
+                                </Popover>
+                              </Col>
+                              <Col>
+                                <ProjectPageActions
+                                  mode={textColor}
+                                  item={item}
+                                  getTasks={getTasks}
+                                />
+                              </Col>
                             </Row>
-                            <Popover placement="left" content="xd" trigger="hover">
-                              <h6>{item.taskname}</h6>
-                            </Popover>
                             <p>
                               Utworzono:{' '}
                               {answer(
@@ -284,21 +293,25 @@ const ProjectPage = () => {
                       next={handleInfinitedOnLoadisDone(isDone(getTaskForView(tasks)))}
                       hasMore={hasMoreisInProgress}
                       useWindow="false"
-                      height={700}
+                      height={600}
                     >
                       {isDone(getTaskForView(tasks)).map((item) => (
                         <List.Item>
                           <Card className={mode ? styles.itemsdark : styles.itemslight}>
-                            <Row justify="end">
-                              <ProjectPageActions
-                                mode={textColor}
-                                item={item}
-                                getTasks={getTasks}
-                              />
+                            <Row>
+                              <Col span={18}>
+                                <Popover placement="left" content="xd" trigger="hover">
+                                  <h6>{item.taskname}</h6>
+                                </Popover>
+                              </Col>
+                              <Col>
+                                <ProjectPageActions
+                                  mode={textColor}
+                                  item={item}
+                                  getTasks={getTasks}
+                                />
+                              </Col>
                             </Row>
-                            <Popover placement="left" content="xd" trigger="hover">
-                              <h6>{item.taskname}</h6>
-                            </Popover>
                             <p>
                               Utworzono:{' '}
                               {answer(
@@ -335,6 +348,7 @@ const ProjectPage = () => {
           <ProjectFile project={project} />
         </TabPane>
       </Tabs>
+      <Chat />
     </div>
   );
 };
